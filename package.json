@@ -1,7 +1,7 @@
 {
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "expo start",
+    "start": "expo start ",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
@@ -23,6 +23,9 @@
     "react-native-screens": "~2.10.1",
     "react-native-swiper-flatlist": "^2.0.4",
     "react-native-web": "~0.13.12",
+    "react-redux": "^7.2.1",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
     "swiper": "^6.3.2"
   },
   "devDependencies": {
