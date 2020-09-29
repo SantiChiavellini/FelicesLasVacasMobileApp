@@ -18,6 +18,10 @@ export default function Faq({ navigation }) {
         title="Home"
         onPress={() => navigation.navigate("Home")}
       />
+      <Button style={globalStyles.buttons}
+        title="SignUp"
+        onPress={() => navigation.navigate("SignUp")}
+      />
       <Text>Preguntas Frecuentes</Text>
       <StatusBar style="auto" />
     </View>

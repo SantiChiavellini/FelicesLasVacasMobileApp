@@ -19,6 +19,13 @@ export const globalStyles = StyleSheet.create({
     buttons: {
         margin: 4,
         width: 30,
-
+    },
+    containerInputs: {
+        textAlign: "center",
+    },
+    buttonsSend: {
+        height: '5vh',
+        width: '50vw',
+        backgroundColor: 'red',
     }
 })

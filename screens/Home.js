@@ -21,6 +21,10 @@ function Home({ navigation }) {
         title="Home"
         onPress={() => navigation.navigate("Home")}
       />
+      <Button style={globalStyles.buttons}
+        title="SignUp"
+        onPress={() => navigation.navigate("SignUp")}
+      />
       <Text style={globalStyles.titleText}>Soy el Home.</Text>
       <StatusBar style="auto" />
     </View>
