@@ -24,8 +24,10 @@ export const globalStyles = StyleSheet.create({
         textAlign: "center",
     },
     buttonsSend: {
-        height: '5vh',
-        width: '50vw',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 50,
+        width: '50%',
         backgroundColor: 'red',
     }
 })

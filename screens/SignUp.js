@@ -35,17 +35,17 @@ function SignUp( props ) {
         <Text>Crea tu cuenta</Text>
         <View style={globalStyles.containerInputs}>
             <Text>Ingresá tu nombre de usuario</Text>
-            <TextInput onChange={readInput}  placeholder="username" style={{borderColor: 'red', padding: '5px', borderWidth: '1px'}}/>
+            <TextInput onChange={readInput}  placeholder="username" style={{borderColor: 'red', padding: 5, borderWidth: 1}}/>
             <Text>Ingresá tu contraseña</Text>
-            <TextInput onChange={readInput} secureTextEntry={true} placeholder="password" style={{borderColor: 'red', padding: '5px', borderWidth: '1px'}}/>
+            <TextInput onChange={readInput} secureTextEntry={true} placeholder="password" style={{borderColor: 'red', padding: 5, borderWidth: 1}}/>
             <Text>Ingresá nuevamente tu contraseña</Text>
-            <TextInput onChange={readInput} secureTextEntry={true} placeholder="passwordValidation" style={{borderColor: 'red', padding: '5px', borderWidth: '1px'}}/>
+            <TextInput onChange={readInput} secureTextEntry={true} placeholder="passwordValidation" style={{borderColor: 'red', padding: 5, borderWidth: 1}}/>
             <Text>Ingresá tu email</Text>
-            <TextInput onChange={readInput} placeholder="email" style={{borderColor: 'red', padding: '5px', borderWidth: '1px'}}/>
+            <TextInput onChange={readInput} placeholder="email" style={{borderColor: 'red', padding: 5, borderWidth: 1}}/>
             <Text>Ingresá tu nombre</Text>
-            <TextInput onChange={readInput} placeholder="name" style={{borderColor: 'red', padding: '5px', borderWidth: '1px'}}/>
+            <TextInput onChange={readInput} placeholder="name" style={{borderColor: 'red', padding: 5, borderWidth: 1}}/>
             <Text>Ingresá tu apellido</Text>
-            <TextInput onChange={readInput} placeholder="surname" style={{borderColor: 'red', padding: '5px', borderWidth: '1px', marginBottom: '2vh'}}/>
+            <TextInput onChange={readInput} placeholder="surname" style={{borderColor: 'red', padding: 5, borderWidth: 1, marginBottom: 20}}/>
             <TouchableOpacity onPress={onPress}>
                 <Text style={globalStyles.buttonsSend}>Enviar</Text>
             </TouchableOpacity>
