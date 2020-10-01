@@ -1,4 +1,5 @@
-import axion from 'axios'
+import axios from 'axios'
+// import SweetAlert from 'react-native-sweet-alert';
 
 
 const UserActions = {
@@ -6,48 +7,52 @@ const UserActions = {
 createUser: (newUser) => {
   
     return async (dispatch, getState) => {
-        console.log(newUser)
-        
-        dispatch({
-            type: "NEW_USER",
-            payload: {  
-              username: newUser.username,
-              name: newUser.name
-            }
-        })
-
-    //   const res = await axios.post("http://127.0.0.1:4000/api/users", newUser)
-    //   const error ={
-    //     mail:"",
-    //     username:""
-    //     }
+        console.log(newUser);
+      const res = await axios.post("http://a36dbf39307d.ngrok.io/api/users", newUser)
+      console.log(res.data);
+      const error ={
+        mail:"",
+        username:""
+        }
  
-    //   if(!res.data.success && res.data.response !== undefined){
-    //     if(res.data.response.errors.mail !== undefined){
-    //       error.mail = "Ese email ya esta en uso"
-    //     }
-    //     if(res.data.response.errors.username !== undefined){
-    //       error.username = "Ese nombre de usuario ya esta en uso"
-    //     }
-    //     return error
+      if(!res.data.success && res.data.response !== undefined){
+        if(res.data.response.errors.mail !== undefined){
+          error.mail = "Ese email ya esta en uso"
+        }
+        if(res.data.response.errors.username !== undefined){
+          error.username = "Ese nombre de usuario ya esta en uso"
+        }
+        return error
         
-    //   }else{
+      }else{
         
-    //     await Swal.fire({  title: 'Welcome!',  text: `It´s nice to have you here, ${res.data.response.name}.`,  icon: 'success',  showConfirmButton: false, timer: 2000,allowOutsideClick: false})
-        // dispatch({
-        //   type: "SET_USER",
-        //   payload: {  
-        //     username: res.data.response.username,
-      
-    //         token: res.data.response.token,
-    //         role: res.data.response.role
-    //       },
-    //     });
-    //     return {
-    //         success: true,
-    //         username: res.data.response.name
-    //     }
-    //   }
+        // await Swal.fire({  title: 'Welcome!',  text: `It´s nice to have you here, ${res.data.response.name}.`,  icon: 'success',  showConfirmButton: false, timer: 2000,allowOutsideClick: false})
+        // await SweetAlert.showAlertWithOptions({
+        //     title: 'Welcome!',
+        //     subTitle: `It´s nice to have you here, ${res.data.response.name}.`,
+        //     confirmButtonTitle: 'OK',
+        //     confirmButtonColor: '#000',
+        //     otherButtonTitle: 'Cancel',
+        //     otherButtonColor: '#dedede',
+        //     style: 'success',
+        //     cancellable: true
+        //   },
+        //     callback => console.log('callback'));
+
+        dispatch({
+          type: "SET_USER",
+          payload: {  
+            username: res.data.response.username,
+            token: res.data.response.token,
+            role: res.data.response.role
+          },
+        });
+        console.log(res.data)
+        return {
+            success: true,
+            username: res.data.response.name
+        }
+      }
 
     };
 }
