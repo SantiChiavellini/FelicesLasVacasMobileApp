@@ -1,11 +1,10 @@
 import { StatusBar } from "expo-status-bar"
 import React, { useEffect, useState } from "react"
-import { StyleSheet, Text, View, Button, TouchableOpacity, Alert} from "react-native"
+import { StyleSheet, Text, View, TouchableOpacity, Alert} from "react-native"
 import { globalStyles } from "../styles/globalStyles"
 import { connect } from "react-redux"
-import { TextInput } from "react-native-gesture-handler"
 import UserActions from '../redux/actions/UserActions'
-import SweetAlert from 'react-native-sweet-alert';
+import { Button, TextInput, Surface, Title, Snackbar, Subheading  } from 'react-native-paper'
 
 function SignUp( props ) {
 
@@ -13,9 +12,15 @@ function SignUp( props ) {
         username: '', password: '', passwordValidation: '', mail: '', name: '', surname: '', loginGoogle:"false"
     }) 
 
+    const [flag, setFlag] = useState(true)
+
+    const [visible, setVisible] = React.useState(false);
+
+    const onDismissSnackBar = () => setVisible(false);
+
     const readInput = (campo, text) => {
         const value = text
-       console.log(campo, text);
+
         setUser({
             ...user,
             [campo]: value
@@ -24,55 +29,57 @@ function SignUp( props ) {
 
     const onPress = async e => {
         e.preventDefault()
-        
+        console.log(user)
         await props.createUser(user)
+        setVisible(!visible)
     }
 
     useEffect(() => {
-      
+      if (user.username !== '' & user.password !== '' & user.passwordValidation !== '' & user.mail !== ''
+        & user.name !== '' & user.surname !== '') {
+        setFlag(false)
+      }
+    }, [user])
+
+    useEffect(() => {
+      console.log(props)
       if (props.token) {
-        Alert.alert(
-          'Hola',
-          `${user.username}`,
-          [
-            {
-              text: 'Ask me later',
-              onPress: () => console.log('Ask me later pressed')
-            },
-            {
-              text: 'Cancel',
-              onPress: () => console.log('Cancel Pressed'),
-              style: 'cancel'
-            },
-            { text: 'OK', onPress: () => console.log('OK Pressed') }
-          ],
-          { cancelable: false }
-        )
+        alert(
+          `Hola ${user.username}`)
       }  
     }, [props])
     
 
   return (
     <View style={globalStyles.container}>
-      <Text style={globalStyles.titleText}>Soy el registro.</Text>
+      <Surface style={globalStyles.surface}>
+        <Subheading style={globalStyles.titleText}>Registro</Subheading>
+      </Surface>
       <StatusBar style="auto" />
       <View>
-        <Text>Crea tu cuenta</Text>
+        <Title style={globalStyles.titleCrearCuenta}>CREA TU CUENTA</Title>
         <View style={globalStyles.containerInputs}>
-            <Text>Ingresá tu nombre de usuario</Text>
-            <TextInput onChangeText={text => readInput('username', text)} style={{borderColor: 'red', padding: 5, borderWidth: 1}}/>
-            <Text>Ingresá tu contraseña</Text>
-            <TextInput onChangeText={text => readInput('password', text)} secureTextEntry={true}  style={{borderColor: 'red', padding: 5, borderWidth: 1}}/>
-            <Text>Ingresá nuevamente tu contraseña</Text>
-            <TextInput onChangeText={text => readInput('passwordValidation', text)} secureTextEntry={true} style={{borderColor: 'red', padding: 5, borderWidth: 1}}/>
-            <Text>Ingresá tu email</Text>
-            <TextInput onChangeText={text => readInput('mail', text)} style={{borderColor: 'red', padding: 5, borderWidth: 1}}/>
-            <Text>Ingresá tu nombre</Text>
-            <TextInput onChangeText={text => readInput('name', text)} style={{borderColor: 'red', padding: 5, borderWidth: 1}}/>
-            <Text>Ingresá tu apellido</Text>
-            <TextInput onChangeText={text => readInput('surname', text)} style={{borderColor: 'red', padding: 5, borderWidth: 1, marginBottom: 30}}/>
-            <TouchableOpacity onPress={onPress}>
-                <Text style={globalStyles.buttonsSend}>Enviar</Text>
+            <TextInput onChangeText={text => readInput('username', text)} style={{height: 50, marginBottom: 20}} data-focusable="false" selectionColor="green" underlineColor="green" label="usuario" />
+            <TextInput onChangeText={text => readInput('password', text)} style={{height: 50, marginBottom: 20}} underlineColor="green" label="contraseña" secureTextEntry={true}  />
+            <TextInput onChangeText={text => readInput('passwordValidation', text)} style={{height: 50, marginBottom: 20}} underlineColor="green" label="repita contraseña" secureTextEntry={true} />
+            <TextInput onChangeText={text => readInput('mail', text)} style={{height: 50, marginBottom: 20}} underlineColor="green" label="Email" />
+            <TextInput onChangeText={text => readInput('name', text)} style={{height: 50, marginBottom: 20}} underlineColor="green" label="nombre" />
+            <TextInput onChangeText={text => readInput('surname', text)} style={{height: 50, marginBottom: 20}} underlineColor="green" label="apellido" />
+            <TouchableOpacity style={globalStyles.buttonsSend} onPress={onPress}>
+                <Text>{visible & !flag ? 'Enviando...' : 'ENVIAR'}</Text>
+                <Snackbar
+                      style={{position: 'relative', bottom: 40, width: '100%'}}
+                      duration={2000}
+                      visible={visible}
+                      onDismiss={onDismissSnackBar}
+                      action={{
+                        label: flag ? ':(' : ':)',
+                        onPress: () => {
+                          // Do something
+                        },
+                      }}>
+                      { flag ? 'Por favor, completa todos los campos.' : 'Gracias por registrarte!' }
+                </Snackbar>
             </TouchableOpacity>
         </View>
       </View>

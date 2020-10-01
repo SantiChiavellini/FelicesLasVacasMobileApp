@@ -14,9 +14,17 @@ const usersReducer = (state = initialState, action) => {
                 role: action.payload.role
             }
     
-            default:
-                return state
-        }
+        case 'SET_USER':    
+            return {
+                ...state,
+                username: action.payload.username,
+                token: action.payload.token,
+                role: action.payload.role
+            }
+
+        default:
+            return state
+    }
 }
     
     
