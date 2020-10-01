@@ -41,11 +41,11 @@ function SignUp( props ) {
     }, [user])
 
     useEffect(() => {
-      if (props.token) {
+      if (props.token & user.username !== '') {
         alert(
           `Hola ${user.username}`)
       }  
-    }, [props])
+    }, [props.token])
 
     
   return (

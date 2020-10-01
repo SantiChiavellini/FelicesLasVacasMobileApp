@@ -31,21 +31,21 @@ function SignIn( props ) {
     }
 
     useEffect(() => {
-        if (props.token) {
+        if (props.token !== '' & user.username !== '') {
           alert(
             `Hola ${user.username}`)
         }  
-    }, [props])
+    }, [props.token])
 
     const onPress = async e => {
         e.preventDefault()
-        await props.createUser(user)
+        await props.logUser(user)
         setVisible(!visible)
     }
 
     return (
         <View style={globalStyles.container}>
-            <Surface style={globalStyles.surface}>
+            <Surface style={globalStyles.surfaceLogIn}>
                 <Subheading style={globalStyles.titleText}>Inicar Sesión</Subheading>
             </Surface>
             <StatusBar style="auto" />
@@ -55,7 +55,7 @@ function SignIn( props ) {
                     <TextInput onChangeText={text => readInput('username', text)} style={{height: 50, marginBottom: 20}} data-focusable="false" selectionColor="green" underlineColor="green" label="usuario" />
                     <TextInput onChangeText={text => readInput('password', text)} style={{height: 50, marginBottom: 20}} underlineColor="green" label="contraseña" secureTextEntry={true}  />
                     <TouchableOpacity style={globalStyles.buttonsSend} onPress={onPress}>
-                        <Text>{visible & !flag ? 'Enviando...' : 'ENVIAR'}</Text>
+                        <Text style={{color: 'white', letterSpacing: 2, fontSize: 16, padding: 7, marginRight: 10, marginLeft: 10}}>{visible & !flag ? 'Enviando...' : 'Enviar'}</Text>
                         <Snackbar
                             style={{position: 'relative', bottom: 40, width: '100%'}}
                             duration={2000}
@@ -67,7 +67,7 @@ function SignIn( props ) {
                                 // Do something
                                 },
                             }}>
-                            { flag ? 'Por favor, completa todos los campos.' : 'Gracias por registrarte!' }
+                            { flag ? 'Por favor, completa todos los campos.' : 'Estamos contento de recibirte nuevamente!' }
                         </Snackbar>
                     </TouchableOpacity>
                 </View>
@@ -78,7 +78,7 @@ function SignIn( props ) {
 }
 
 const mapDispatchToProps = {
-    createUser: UserActions.createUser
+    logUser: UserActions.logUser
 }
 
 const mapStateToProps = state => {

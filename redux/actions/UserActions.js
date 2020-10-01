@@ -5,7 +5,7 @@ const UserActions = {
 
   createUser: (newUser) => {
       return async (dispatch, getState) => {
-        const res = await axios.post("http://9adba1d74e39.ngrok.io/api/users", newUser)
+        const res = await axios.post("http://localhost:4000/api/users", newUser)
         console.log(res.data)
         const error ={
           mail:"",
@@ -44,14 +44,15 @@ const UserActions = {
   logUser: (user) => {
     return async (dispatch, getState) => {
       const res = await axios.post("http://127.0.0.1:4000/api/user", user )
-      
+      console.log(res.data)
+
       if (res.data.success !== true) {
         return res.data.message
       } else {
         //alert
           dispatch({
               type: "SET_USER",
-              payload:res.data.response
+              payload: res.data.response
           })
           return {
             success: true,
