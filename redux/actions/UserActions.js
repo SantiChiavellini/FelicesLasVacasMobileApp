@@ -5,10 +5,10 @@ import axios from 'axios'
 const UserActions = {
 
 createUser: (newUser) => {
-  
+    console.log(newUser)
     return async (dispatch, getState) => {
         
-      const res = await axios.post("http://127.0.0.1:4000/api/users", newUser)
+      const res = await axios.post("http://localhost:4000/api/users", newUser)
       const error ={
         mail:"",
         username:""
@@ -25,19 +25,6 @@ createUser: (newUser) => {
         
       }else{
         
-        // await Swal.fire({  title: 'Welcome!',  text: `It´s nice to have you here, ${res.data.response.name}.`,  icon: 'success',  showConfirmButton: false, timer: 2000,allowOutsideClick: false})
-        // await SweetAlert.showAlertWithOptions({
-        //     title: 'Welcome!',
-        //     subTitle: `It´s nice to have you here, ${res.data.response.name}.`,
-        //     confirmButtonTitle: 'OK',
-        //     confirmButtonColor: '#000',
-        //     otherButtonTitle: 'Cancel',
-        //     otherButtonColor: '#dedede',
-        //     style: 'success',
-        //     cancellable: true
-        //   },
-        //     callback => console.log('callback'));
-
         dispatch({
           type: "SET_USER",
           payload: {  

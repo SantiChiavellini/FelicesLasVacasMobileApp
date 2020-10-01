@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native'
+import { linear } from 'react-native/Libraries/Animated/src/Easing'
 
 export const globalStyles = StyleSheet.create({
     container: {
@@ -10,7 +11,18 @@ export const globalStyles = StyleSheet.create({
     titleText: {
         fontFamily: 'karla-regular',
         fontSize: 18,
-        color: '#333',
+        color: '#fff'
+    },
+    surface: {
+        padding: 8,
+        height: 40,
+        width: 150,
+        alignItems: 'center',
+        justifyContent: 'center',
+        elevation: 10,
+        backgroundColor: '#13aa52',
+        marginBottom: 10,
+        borderRadius: 20
     },
     paragraph: {
         marginVertical: 8,
@@ -24,8 +36,19 @@ export const globalStyles = StyleSheet.create({
         textAlign: "center",
     },
     buttonsSend: {
+        textAlign: "center",
         height: 30,
-        width: '50%',
-        backgroundColor: 'red',
+        width: '100%',
+        backgroundColor: '#13aa52'
+    },
+    titleCrearCuenta: {
+        textAlign: 'center',
+        borderBottomColor: '#13aa52a2',
+        borderTopColor: '#13aa52a2',
+        borderTopWidth: 3,
+        borderBottomWidth: 3,
+        paddingTop: 10,
+        paddingBottom: 10,
+        marginBottom: 10
     }
 })

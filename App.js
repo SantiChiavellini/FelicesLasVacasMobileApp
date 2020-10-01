@@ -10,6 +10,8 @@ import Faq from './screens/Faq';
 import Home from './screens/Home';
 import Products from './screens/Products';
 import SignUp from './screens/SignUp';
+import { Provider as PaperProvider } from 'react-native-paper';
+
 
 const getFonts = () =>
   Font.loadAsync({
@@ -28,15 +30,18 @@ export default function App() {
   if (fontsLoaded) {
    return(
     <Provider store={store}>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="Faq" component={Faq} />
-          <Stack.Screen name="Products" component={Products} />
-          <Stack.Screen name="SignUp" component={SignUp} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <PaperProvider>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen name="Faq" component={Faq} />
+            <Stack.Screen name="Products" component={Products} />
+              <Stack.Screen name="SignUp" component={SignUp} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </PaperProvider>
     </Provider>
+
    )
   } else {
     return (
