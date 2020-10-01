@@ -5,7 +5,6 @@ import axios from 'axios'
 const UserActions = {
 
 createUser: (newUser) => {
-    console.log(newUser)
     return async (dispatch, getState) => {
         
       const res = await axios.post("http://localhost:4000/api/users", newUser)

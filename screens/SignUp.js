@@ -5,14 +5,13 @@ import { globalStyles } from "../styles/globalStyles"
 import { connect } from "react-redux"
 import UserActions from '../redux/actions/UserActions'
 import { Button, TextInput, Surface, Title, Snackbar, Subheading  } from 'react-native-paper'
+import { onChange } from "react-native-reanimated"
 
 function SignUp( props ) {
 
     const [user, setUser] = useState({ 
         username: '', password: '', passwordValidation: '', mail: '', name: '', surname: '', loginGoogle:"false"
     }) 
-
-    console.log(user)
 
     const [flag, setFlag] = useState(true)
 
@@ -22,7 +21,6 @@ function SignUp( props ) {
 
     const readInput = (campo, text) => {
         const value = text
-
         setUser({
             ...user,
             [campo]: value
@@ -31,7 +29,6 @@ function SignUp( props ) {
 
     const onPress = async e => {
         e.preventDefault()
-        console.log(user)
         await props.createUser(user)
         setVisible(!visible)
     }
@@ -44,14 +41,13 @@ function SignUp( props ) {
     }, [user])
 
     useEffect(() => {
-      console.log(props)
       if (props.token) {
         alert(
           `Hola ${user.username}`)
       }  
     }, [props])
-    
 
+    
   return (
     <View style={globalStyles.container}>
       <Surface style={globalStyles.surface}>
@@ -59,19 +55,19 @@ function SignUp( props ) {
       </Surface>
       <StatusBar style="auto" />
       <View>
-        <Title style={globalStyles.titleCrearCuenta}>CREA TU CUENTA</Title>
+        <Title style={globalStyles.titleCrearCuenta}>CREE UNA CUENTA</Title>
         <View style={globalStyles.containerInputs}>
             <TextInput onChangeText={text => readInput('username', text)} style={{height: 50, marginBottom: 20}} data-focusable="false" selectionColor="green" underlineColor="green" label="usuario" />
-            <TextInput onChangeText={text => readInput('password', text)} style={{height: 50, marginBottom: 20}} underlineColor="green" label="contraseña" secureTextEntry={true}  />
+            <TextInput onChangeText={text => readInput('password', text)} style={{height: 50, marginBottom: 20}} underlineColor="green" label="contraseña" secureTextEntry={true} />
             <TextInput onChangeText={text => readInput('passwordValidation', text)} style={{height: 50, marginBottom: 20}} underlineColor="green" label="repita contraseña" secureTextEntry={true} />
             <TextInput onChangeText={text => readInput('mail', text)} style={{height: 50, marginBottom: 20}} underlineColor="green" label="Email" />
             <TextInput onChangeText={text => readInput('name', text)} style={{height: 50, marginBottom: 20}} underlineColor="green" label="nombre" />
             <TextInput onChangeText={text => readInput('surname', text)} style={{height: 50, marginBottom: 20}} underlineColor="green" label="apellido" />
             <TouchableOpacity style={globalStyles.buttonsSend} onPress={onPress}>
-                <Text>{visible & !flag ? 'Enviando...' : 'ENVIAR'}</Text>
+                <Text style={{color: 'white', letterSpacing: 2, fontSize: 16, padding: 7, marginRight: 10, marginLeft: 10}}>{visible & !flag ? 'Enviando...' : 'Enviar'}</Text>
                 <Snackbar
-                      style={{position: 'relative', bottom: 40, width: '100%'}}
-                      duration={2000}
+                      style={{position: 'relative', bottom: 40, width: '95%'}}
+                      duration={3000}
                       visible={visible}
                       onDismiss={onDismissSnackBar}
                       action={{
@@ -80,7 +76,7 @@ function SignUp( props ) {
                           // Do something
                         },
                       }}>
-                      { flag ? 'Por favor, completa todos los campos.' : 'Gracias por registrarte!' }
+                      { flag ? 'Por favor, complete todos los campos.' : 'Gracias por registrarte!' }
                 </Snackbar>
             </TouchableOpacity>
         </View>

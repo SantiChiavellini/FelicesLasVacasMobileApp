@@ -11,12 +11,13 @@ export const globalStyles = StyleSheet.create({
     titleText: {
         fontFamily: 'karla-regular',
         fontSize: 18,
-        color: '#fff'
+        color: '#fff',
+        letterSpacing: 1
     },
     surface: {
         padding: 8,
         height: 40,
-        width: 150,
+        width: 110,
         alignItems: 'center',
         justifyContent: 'center',
         elevation: 10,
@@ -37,9 +38,11 @@ export const globalStyles = StyleSheet.create({
     },
     buttonsSend: {
         textAlign: "center",
-        height: 30,
-        width: '100%',
-        backgroundColor: '#13aa52'
+        height: 40,
+        width: '80%',
+        backgroundColor: '#13aa52',
+        marginLeft: '10%',
+        borderRadius: 5
     },
     titleCrearCuenta: {
         textAlign: 'center',
