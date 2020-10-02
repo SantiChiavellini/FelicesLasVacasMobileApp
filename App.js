@@ -14,7 +14,6 @@ import Products from './screens/Products';
 import SignUp from './screens/SignUp';
 import SignIn from './screens/SignIn'
 import Product from './screens/Product'
-import { Provider as PaperProvider } from 'react-native-paper';
 
 
 const getFonts = () =>
