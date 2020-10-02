@@ -13,6 +13,7 @@ export const AppNavigator = () => (
     <Stack.Navigator initialRouteName="Home">
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Products" component={Products} />
+      <Stack.Screen name="Product" component={Product} />
       <Stack.Screen name="Preguntas Frecuentes" component={Faq} />
     </Stack.Navigator>
   </NavigationContainer>

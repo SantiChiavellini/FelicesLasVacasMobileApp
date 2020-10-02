@@ -3,14 +3,13 @@ import { StyleSheet } from 'react-native'
 export const globalStyles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 24,
-        justifyContent: 'center'
+        justifyContent: 'flex-start'
         
     },
     titleText: {
         fontFamily: 'karla-regular',
         fontSize: 18,
-        color: '#333',
+        color: 'black',
     },
     paragraph: {
         marginVertical: 8,
