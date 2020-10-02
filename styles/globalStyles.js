@@ -4,18 +4,30 @@ import { linear } from 'react-native/Libraries/Animated/src/Easing'
 export const globalStyles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'flex-start'
-        
+        padding: 24,
+        justifyContent: 'center'
     },
     titleText: {
         fontFamily: 'karla-regular',
         fontSize: 18,
-        color: '#fff'
+        color: '#fff',
+        letterSpacing: 1
     },
     surface: {
         padding: 8,
         height: 40,
-        width: 150,
+        width: 110,
+        alignItems: 'center',
+        justifyContent: 'center',
+        elevation: 10,
+        backgroundColor: '#13aa52',
+        marginBottom: 10,
+        borderRadius: 20
+    },
+    surfaceLogIn: {
+        padding: 8,
+        height: 40,
+        width: 180,
         alignItems: 'center',
         justifyContent: 'center',
         elevation: 10,
@@ -36,9 +48,11 @@ export const globalStyles = StyleSheet.create({
     },
     buttonsSend: {
         textAlign: "center",
-        height: 30,
-        width: '100%',
-        backgroundColor: '#13aa52'
+        height: 40,
+        width: '80%',
+        backgroundColor: '#13aa52',
+        marginLeft: '10%',
+        borderRadius: 5
     },
     titleCrearCuenta: {
         textAlign: 'center',
@@ -49,5 +63,24 @@ export const globalStyles = StyleSheet.create({
         paddingTop: 10,
         paddingBottom: 10,
         marginBottom: 10
+    },
+    containerFaq: {
+        flex: 1,
+        backgroundColor: 'rgba(0,0,0,0.2)',
+    },
+    faq: {
+        flex: 1,
+    },
+    firstRes: {
+        maxWidth: '90%',
+        textAlign: 'justify'
+    },
+    titleFaq: {
+        paddingLeft: 30,
+        borderBottomColor: '#13aa52',
+        borderBottomWidth: 2,
+        width: '90%',
+        marginLeft: 15,
+        color: 'green'
     }
 })

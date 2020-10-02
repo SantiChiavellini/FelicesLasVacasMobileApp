@@ -4,10 +4,8 @@ import axios from 'axios'
 const UserActions = {
 
   createUser: (newUser) => {
-      console.log(newUser)
       return async (dispatch, getState) => {
-          console.log('esta aca');
-        const res = await axios.post("http://9adba1d74e39.ngrok.io/api/users", newUser)
+        const res = await axios.post("http://91db59da2035.ngrok.io/api/users", newUser)
         console.log(res.data)
         const error ={
           mail:"",
@@ -29,8 +27,7 @@ const UserActions = {
             type: "SET_USER",
             payload: {  
               username: res.data.response.username,
-              token: res.data.response.token,
-              role: res.data.response.role
+              token: res.data.response.token
             },
           });
           console.log(res.data)
@@ -45,15 +42,19 @@ const UserActions = {
 
   logUser: (user) => {
     return async (dispatch, getState) => {
-      const res = await axios.post("http://127.0.0.1:4000/api/user", user )
+      const res = await axios.post("http://91db59da2035.ngrok.io/api/user", user )
       
+
       if (res.data.success !== true) {
         return res.data.message
       } else {
         //alert
           dispatch({
               type: "SET_USER",
-              payload:res.data.response
+              payload: {
+                username: res.data.response.username,
+                token: res.data.response.token
+              }
           })
           return {
             success: true,
@@ -62,6 +63,32 @@ const UserActions = {
       }
     };
   },
-
+  forcedLogIn: token => {
+    return async (dispatch, getState) => {
+        const res = await axios.get(' http://91db59da2035.ngrok.io/api/tokenVerificator', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        
+        dispatch({
+            type: "SET_USER",
+            payload: {
+                username: res.data.response.username,
+                token: token, 
+                role: res.data.response.role, 
+                name: res.data.response.name
+            }
+        })
+        return res.data.response.username
+    }
+  },
+  unlogUser : () => {
+    return (dispatch, getState) =>{
+        dispatch({
+            type: "UNLOG_USER_FROM_APP"
+        })
+    }
+  },
 }
 export default UserActions

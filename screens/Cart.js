@@ -1,88 +1,65 @@
-import { StatusBar } from "expo-status-bar";
-import React, {useEffect, useState} from "react";
-import { StyleSheet, 
-  Text, 
-  View, 
-  Image, 
-  ImageBackground,
-  TextInput
-} from "react-native";
-import { connect } from "react-redux";
-import productsActions from '../redux/actions/productsActions'
+import { StatusBar } from 'expo-status-bar';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View, Button } from 'react-native';
+import { State } from 'react-native-gesture-handler';
+import { connect } from 'react-redux';
+import ProductCart from '../components/ProductCart';
+import { globalStyles } from '../styles/globalStyles'
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
-import { Card, Title, Paragraph } from 'react-native-paper';
-import Icon from 'react-native-vector-icons/Ionicons'
-import { color } from "react-native-reanimated";
-import ProductCard from "../components/ProductCard"
+import { Card, Title} from 'react-native-paper';
+
+function Cart(props, { navigation }) {
 
 
-
-function Home(props, { navigation }) {
-
-  const [topProducts, setTopProducts] = useState([])
+  useEffect(()=>{
+    console.log(props)
   
-
-  useEffect( () => {
-    
-    async function fetchData() {
-      const products = await props.getProducts()
-      var ordered =  products.sort((a,b) => b.views-a.views)
-      var popular = ordered.slice(0, 6)
-      setTopProducts(popular) 
-    }
-    fetchData()
-    console.log("hola")
+  })
   
-  }, [])
-
-  
-  
-  
+  if (props.cartProducts.length !== 0) {
   return (
     
-
-    <View style={styles.viewGeneral}>
-      <ImageBackground source={require('../assets/BANDA.png')} style={styles.image}>
-       
-       <Image
-          style={styles.logo}
-          source={{
-            uri:'https://i.postimg.cc/y84JL83W/logo.png'
-          }}
-        />
-       
-      </ImageBackground>
-      <View>
-        <Text style={styles.subtitle}>Productos Destacados</Text>
-      </View>
+    <View style={globalStyles.container}>
       <View style={styles.viewCart}>
-        {topProducts.length !== 0 ?
           <FlatList 
           style={styles.list}
-          data={topProducts}
-          renderItem={(item) => <ProductCard prod={item}/>}
-          keyExtractor={item => item._id}
+          data={props.cartProducts}
+          renderItem={(item) => <ProductCart prod={item}/>}
+          keyExtractor={item => (item._id)}
           />
-          :
-          <Text>Loading</Text>
-        }
       </View>
     </View>
   );
-}
-
-const mapDispatchToProps ={
-  getProducts: productsActions.getProducts
-}
-
-const mapStateToProps = (state) =>{
- 
-  return {
-    products: state.productsRed.products
+  }else{
+    return(
+      <View style={globalStyles.container}>
+      <View style={styles.viewCart}>
+        <FlatList 
+          style={styles.list}
+          data={["El carrito esta vacio"]}
+          renderItem={(item) => 
+          <Card style={styles.containerCard}>
+            <Card.Content >
+              <Title>"El carrito esta vacio"</Title>
+            </Card.Content>
+          </Card>
+          }
+          keyExtractor={item => (item._id)}
+          />
+      </View>
+    </View>
+    )
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps) (Home) 
+const mapStateToProps = (state) =>{
+  
+  return {
+    cartProducts: state.productsRed.cartProducts
+  }
+}
+
+export default connect (mapStateToProps)(Cart)
 
 const styles = StyleSheet.create({
   container: {
