@@ -39,7 +39,7 @@ export const DrawerContent = ({navigation}) => {
                 <View style={styles.drawerContent}>
 
                     <View style={styles.userInfoSection}>
-                        <View style={{flexDirection:"row", alignItems:"c"}}>
+                        <View style={{flexDirection:"row", alignItems:"center"}}>
                             <Avatar.Image 
                                 source={{
                                     uri:'https://i.postimg.cc/y84JL83W/logo.png'

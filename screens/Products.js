@@ -17,7 +17,7 @@ function Products(props, { navigation }) {
     bringProducts();
   }, []);
 
-  console.log(props.products);
+  console.log(props);
 
   return (
     <>

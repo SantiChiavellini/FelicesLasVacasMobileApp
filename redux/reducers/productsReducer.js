@@ -19,6 +19,12 @@ const productsReducer = (state = initialState, action) => {
 
 
     switch (action.type) {
+
+        case 'GET_PRODUCTS_USER':
+            return {
+                ...state,
+                products: action.payload,
+            }
         
         case 'ADD_TO_CART':
             

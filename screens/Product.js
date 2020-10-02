@@ -4,16 +4,14 @@ import { Avatar, Button, Card, Title, Paragraph } from "react-native-paper";
 import { StyleSheet, Text, View } from "react-native";
 import { useEffect } from "react";
 
-
-
-
-
 const Product = (props) => {
-  
     
+    console.log(props);
+
     return(
     <View>
         <Text>
+            Hi
             {props.route.params.name}
         </Text>
     </View>

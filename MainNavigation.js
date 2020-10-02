@@ -12,6 +12,7 @@ import MainTabScreen from './screens/MainTabScreen'
 import RootStackScreen from './screens/RootStackScreen';
 import LogOut from './screens/LogOut';
 import { createStackNavigator } from '@react-navigation/stack';
+import Product from './screens/Product'
 
 
 
@@ -22,21 +23,18 @@ const Stack = createStackNavigator()
 const MainNavigation= (props) => {
     return(
 
-
-
-      
-
       <NavigationContainer>
         {props.token
-        ?
-        <Drawer.Navigator 
-          drawerPosition="left"
-          drawerContent = {props => <DrawerContent  {...props} />}>
-            <Drawer.Screen name="Main" component={MainTabScreen} />
-            <Drawer.Screen name="LogOut" component={LogOut} />
-        </Drawer.Navigator>
-        :
-          <RootStackScreen />
+          ?
+          <Drawer.Navigator 
+            drawerPosition="left"
+            drawerContent = {props => <DrawerContent  {...props} />}>
+              <Drawer.Screen name="Main" component={MainTabScreen} />
+              <Drawer.Screen name="LogOut" component={LogOut} />
+              <Drawer.Screen name="Product" component={Product} />
+          </Drawer.Navigator>
+          :
+            <RootStackScreen />
         }
         
       </NavigationContainer>
