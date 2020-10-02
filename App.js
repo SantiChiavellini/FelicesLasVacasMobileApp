@@ -1,5 +1,7 @@
-import 'react-native-gesture-handler';
+import "react-native-gesture-handler";
+import { AppNavigator } from "./routes/AppNavigator";
 import { AppLoading } from "expo";
+import { Provider as PaperProvider } from "react-native-paper";
 import React, { useEffect, useState } from "react";
 import * as Font from "expo-font";
 import createStore from "./configureStore"
@@ -11,6 +13,7 @@ import Home from './screens/Home';
 import Products from './screens/Products';
 import SignUp from './screens/SignUp';
 import SignIn from './screens/SignIn'
+import Product from './screens/Product'
 import { Provider as PaperProvider } from 'react-native-paper';
 
 
@@ -20,11 +23,9 @@ const getFonts = () =>
     "karla-bolditalic": require("./assets/fonts/Karla-BoldItalic.ttf"),
   });
 
+const Stack = createStackNavigator();
 
-  const Stack = createStackNavigator();
-
-
-  const store = createStore()
+const store = createStore();
 export default function App() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
 
@@ -37,6 +38,7 @@ export default function App() {
             <Stack.Screen name="Home" component={Home} />
             <Stack.Screen name="Faq" component={Faq} />
             <Stack.Screen name="Products" component={Products} />
+            <Stack.Screen name="Product" component={Product} />
             <Stack.Screen name="SignUp" component={SignUp} />
             <Stack.Screen name="SignIn" component={SignIn} />
           </Stack.Navigator>

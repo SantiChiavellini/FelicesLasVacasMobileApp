@@ -4,8 +4,7 @@ import { linear } from 'react-native/Libraries/Animated/src/Easing'
 export const globalStyles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 24,
-        justifyContent: 'center'
+        justifyContent: 'flex-start'
         
     },
     titleText: {
