@@ -30,7 +30,7 @@ const UserActions = {
               token: res.data.response.token
             },
           });
-          console.log(res.data)
+
           return {
               success: true,
               username: res.data.response.name

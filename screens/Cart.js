@@ -12,7 +12,7 @@ function Cart(props, { navigation }) {
 
 
   useEffect(()=>{
-    console.log(props)
+    // console.log(props)
   
   })
   

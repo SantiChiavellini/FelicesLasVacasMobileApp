@@ -13,7 +13,7 @@ const productsReducer = (state = initialState, action) => {
         try {
             await AsyncStorage.setItem('cart', value)
         }catch(e){
-            console.log(e)
+            // console.log(e)
         }
     }
 
