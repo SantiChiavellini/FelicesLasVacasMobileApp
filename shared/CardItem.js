@@ -9,7 +9,7 @@ const CardItem = (props) => (
   
     <Card>
       <Card.Cover source={{ uri: `${props.product.photo}` }} />
-      <Card.Content>
+      <Card.Content style={styles.cardBody}>
         <Paragraph style={styles.slot}>
             <Text>
               ${props.product.price}
@@ -17,19 +17,19 @@ const CardItem = (props) => (
         </Paragraph>
         <Title style={styles.titleBox}>{props.product.name}</Title>
       </Card.Content>
-      {/* <Paragraph>Descripción:</Paragraph>
-      <Paragraph>{props.product.description}</Paragraph> */}
-      {/* <Card.Actions>
-        <Button>Cancel</Button>
-        <Button>Ok</Button>
-      </Card.Actions> */}
     </Card>
   
 );
 
 const styles = StyleSheet.create({
+  cardBody: {
+    flex: 1,
+    paddingTop: 15,
+  },
   titleBox: {
-    minHeight: 110,
+    minHeight: 105,
+    flex: 1,
+    flexShrink: 0
   },
   slot: {
     minHeight: 30,

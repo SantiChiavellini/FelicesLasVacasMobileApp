@@ -17,14 +17,11 @@ function Products(props, { navigation }) {
     bringProducts();
   }, []);
 
-  console.log(props);
+  console.log(props.products);
 
   return (
     <>
-      <View style={globalStyles.container}>
-        <Text>Soy Products</Text>
         <StatusBar style="auto" />
-
         {/* FlatList con los productos */}
         <View style={styles.container}>
           <FlatList
@@ -41,7 +38,6 @@ function Products(props, { navigation }) {
             keyExtractor={(item) => "#" + item._id}
           />
         </View>
-      </View>
     </>
   );
 }
@@ -52,6 +48,7 @@ const styles = StyleSheet.create({
     height: "85%",
     padding: 7,
     marginTop: StatusBar.currentHeight || 0,
+    flex: 1,
   },
   boxItem: {
     width: "50%",
