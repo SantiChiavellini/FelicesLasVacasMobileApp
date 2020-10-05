@@ -5,8 +5,6 @@ import { StyleSheet, Text, View } from "react-native";
 import { useEffect } from "react";
 
 const Product = (props) => {
-    
-    console.log(props);
 
     return(
     <View>

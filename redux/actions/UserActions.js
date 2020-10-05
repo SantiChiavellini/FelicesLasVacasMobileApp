@@ -5,8 +5,8 @@ const UserActions = {
 
   createUser: (newUser) => {
       return async (dispatch, getState) => {
-        const res = await axios.post("http://7cc0a606489d.ngrok.io/api/users", newUser)
-        console.log(res.data)
+        const res = await axios.post("http://5eba683dfa67.ngrok.io/api/users", newUser)
+
         const error ={
           mail:"",
           username:""
@@ -30,7 +30,7 @@ const UserActions = {
               token: res.data.response.token
             },
           });
-          console.log(res.data)
+
           return {
               success: true,
               username: res.data.response.name
@@ -42,7 +42,7 @@ const UserActions = {
 
   logUser: (user) => {
     return async (dispatch, getState) => {
-      const res = await axios.post("http://7cc0a606489d.ngrok.io/api/user", user )
+      const res = await axios.post("http://5eba683dfa67.ngrok.io/api/user", user )
       
 
       if (res.data.success !== true) {
@@ -65,7 +65,7 @@ const UserActions = {
   },
   forcedLogIn: token => {
     return async (dispatch, getState) => {
-        const res = await axios.get('http://7cc0a606489d.ngrok.io/api/tokenVerificator', {
+        const res = await axios.get('http://5eba683dfa67.ngrok.io/api/tokenVerificator', {
             headers: {
                 Authorization: `Bearer ${token}`
             }

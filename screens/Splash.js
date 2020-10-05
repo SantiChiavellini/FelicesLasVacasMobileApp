@@ -21,8 +21,7 @@ const SplashScreen = ({navigation}) => {
         } catch(e) {
           // clear error
         }
-      
-        console.log('Done.')
+
       }
       
       clearAll()  

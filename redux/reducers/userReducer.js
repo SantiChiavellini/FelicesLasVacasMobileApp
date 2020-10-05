@@ -9,7 +9,7 @@ const storeData = async (value) => {
     try {
         await AsyncStorage.setItem('token', value)
     }catch(e){
-        console.log(e)
+        // console.log(e)
     }
 }
 
@@ -17,7 +17,7 @@ const deleteData = async () => {
     try {
         await AsyncStorage.removeItem('token')
     }catch(e){
-        console.log(e)
+        // console.log(e)
     }
 }
 
@@ -25,7 +25,7 @@ const deleteData = async () => {
 const usersReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'SET_USER':
-            console.log(typeof(action.payload.token))
+
             /* storeData(action.payload.token) */
             return {
                 ...state,

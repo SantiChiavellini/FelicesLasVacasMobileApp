@@ -15,8 +15,6 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import { color } from "react-native-reanimated";
 import ProductCard from "../components/ProductCard"
 
-
-
 function Home(props, { navigation }) {
 
   const [topProducts, setTopProducts] = useState([])
@@ -31,12 +29,8 @@ function Home(props, { navigation }) {
       setTopProducts(popular) 
     }
     fetchData()
-    console.log("hola")
   
   }, [])
-
-  
-  
   
   return (
     
