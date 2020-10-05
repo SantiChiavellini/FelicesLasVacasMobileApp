@@ -4,13 +4,7 @@ import { StyleSheet, Text, View, TouchableOpacity, Alert , Platform, TextInput} 
 import { globalStyles } from "../styles/globalStyles"
 import { connect } from "react-redux"
 import UserActions from '../redux/actions/UserActions'
-import { 
-    Button,  
-    Surface, 
-    Title, 
-    Snackbar, 
-    Subheading
-} from 'react-native-paper'
+import { Button,  Surface, Title, Snackbar, Subheading} from 'react-native-paper'
 import * as Animatable from 'react-native-animatable';
 import Feather from 'react-native-vector-icons/Feather'
 import FontAwesome from 'react-native-vector-icons/FontAwesome';

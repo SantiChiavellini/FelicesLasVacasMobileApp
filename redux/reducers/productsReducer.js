@@ -13,7 +13,7 @@ const productsReducer = (state = initialState, action) => {
         try {
             await AsyncStorage.setItem('cart', value)
         }catch(e){
-            console.log(e)
+            // console.log(e)
         }
     }
 
@@ -30,6 +30,12 @@ const getMyObject = async () => {
       
       }
     switch (action.type) {
+
+        case 'GET_PRODUCTS_USER':
+            return {
+                ...state,
+                products: action.payload,
+            }
         
         case 'ADD_TO_CART':
             var exist = false

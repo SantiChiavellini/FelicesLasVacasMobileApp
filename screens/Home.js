@@ -32,9 +32,6 @@ function Home(props, { navigation }) {
     
   
   }, [])
-
-  
-  
   
   return (
     

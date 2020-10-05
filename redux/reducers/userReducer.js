@@ -10,7 +10,7 @@ const storeData = async (value) => {
     try {
         await AsyncStorage.setItem('token', value)
     }catch(e){
-        console.log(e)
+        // console.log(e)
     }
 }
 
@@ -18,7 +18,7 @@ const deleteData = async () => {
     try {
         await AsyncStorage.removeItem('token')
     }catch(e){
-        console.log(e)
+        // console.log(e)
     }
 }
 

@@ -20,18 +20,10 @@ const getFonts = () =>
   Font.loadAsync({
     "karla-regular": require("./assets/fonts/Karla-Regular.ttf"),
     "karla-bolditalic": require("./assets/fonts/Karla-BoldItalic.ttf"),
-  });
-
-  
-
-  
-  
+  }) 
 
 const App= (props) => {
-  const [fontsLoaded, setFontsLoaded] = useState(false);
-  
-  
-  
+  const [fontsLoaded, setFontsLoaded] = useState(false)
   
   if (fontsLoaded) {
    
@@ -40,6 +32,7 @@ const App= (props) => {
     <Provider store={myStore}>
       <MainNavigation />
     </Provider>
+
    )
   } else {
     return (

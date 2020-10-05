@@ -4,13 +4,7 @@ import { StyleSheet, Text, View, TouchableOpacity, Alert , Platform, TextInput} 
 import { globalStyles } from "../styles/globalStyles"
 import { connect } from "react-redux"
 import UserActions from '../redux/actions/UserActions'
-import { 
-    Button,  
-    Surface, 
-    Title, 
-    Snackbar, 
-    Subheading
-} from 'react-native-paper'
+import { Button, Surface, Title, Snackbar, Subheading} from 'react-native-paper'
 import * as Animatable from 'react-native-animatable';
 import Feather from 'react-native-vector-icons/Feather'
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -78,25 +72,24 @@ function SignIn( props,{navigation} ) {
                 style={styles.footer}
                 animation="fadeInUpBig"
             >
-                
-                    <Text style={styles.text_footer}>Usuario</Text>
-                    <View style={styles.action}>
-                    <FontAwesome 
-                        name="user-o"
-                        color="#05375a"
-                        size={20}
-                    />
-                    <TextInput 
-                        onChangeText={text => readInput('username', text)} 
-                        style={styles.textInput} 
-                        data-focusable="false" 
-                        selectionColor="green" 
-                        underlineColor="green" 
-                        autoCapitalize="none"
-                        placeholder="Ingresa tu usuario"
-                        
-                    />
-                    {checkInputText === true ?
+                <Text style={styles.text_footer}>Usuario</Text>
+                <View style={styles.action}>
+                <FontAwesome 
+                    name="user-o"
+                    color="#05375a"
+                    size={20}
+                />
+                <TextInput 
+                    onChangeText={text => readInput('username', text)} 
+                    style={styles.textInput} 
+                    data-focusable="false" 
+                    selectionColor="green" 
+                    underlineColor="green" 
+                    autoCapitalize="none"
+                    placeholder="Ingresa tu usuario"
+                    
+                />
+                {checkInputText === true ?
                     <>
                     <Animatable.View
                         animation="bounceIn"
@@ -108,78 +101,74 @@ function SignIn( props,{navigation} ) {
                         />
                     </Animatable.View>
                     </>
-                    :null}
-                    </View>
-                    <Text style={[styles.text_footer,{
-                        marginTop:35}]}>Contraseña</Text>
-                    <View style={styles.action}>
-                    <FontAwesome 
-                        name="lock"
-                        color="#05375a"
+                :null}
+                </View>
+                <Text style={[styles.text_footer,{
+                    marginTop:35}]}>Contraseña</Text>
+                <View style={styles.action}>
+                <FontAwesome 
+                    name="lock"
+                    color="#05375a"
+                    size={20}
+                />
+                <TextInput 
+                    onChangeText={text => readInput('password', text)} 
+                    style={styles.textInput} 
+                    data-focusable="false" 
+                    selectionColor="#009387" 
+                    underlineColor="#009387" 
+                    autoCapitalize="none"
+                    placeholder="Ingresa tu contraseña"
+                    secureTextEntry={user.secureText ? true : false}
+                />
+                
+                <TouchableOpacity
+                onPress={secureTextEntry}
+                >
+                    <Feather 
+                        name={user.secureText ?"eye-off":"eye"}
+                        color="#009387"
                         size={20}
                     />
-                    <TextInput 
-                        onChangeText={text => readInput('password', text)} 
-                        style={styles.textInput} 
-                        data-focusable="false" 
-                        selectionColor="#009387" 
-                        underlineColor="#009387" 
-                        autoCapitalize="none"
-                        placeholder="Ingresa tu contraseña"
-                        secureTextEntry={user.secureText ? true : false}
-                    />
-                    
-                    <TouchableOpacity
-                    onPress={secureTextEntry}
-                    >
-                        
-                        <Feather 
-                            name={user.secureText ?"eye-off":"eye"}
-                            color="#009387"
-                            size={20}
-                        />
-                    </TouchableOpacity>  
-                    </View>
+                </TouchableOpacity>  
+                </View>
 
-
-                    <TouchableOpacity style={styles.buttonIn} onPress={onPress}>
-                        <Text style={{
-                                color: 'white', 
-                                letterSpacing: 2, 
-                                fontSize: 16, 
-                                paddingHorizontal: 7, 
-                                paddingVertical:10,
-                                marginRight: 10, 
-                                marginLeft: 10}}
-                            >{visible & !flag ? 'Iniciando...' : 'Iniciar Sesión'}
-                            </Text>
-                        <Snackbar
-                            style={{position: 'relative', bottom: 40, width: '100%'}}
-                            duration={2000}
-                            visible={visible}
-                            onDismiss={onDismissSnackBar}
-                            action={{
-                                label: flag ? ':(' : ':)',
-                                onPress: () => {
-                                // Do something
-                                },
-                            }}>
-                            { flag ? 'Por favor, completa todos los campos.' : 'Estamos contentos de recibirte nuevamente!' }
-                        </Snackbar>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.buttonUp} onPress={() => props.navigation.navigate("SignUpScreen")}>
-                        <Text style={{
-                            color: '#009387', 
+                <TouchableOpacity style={styles.buttonIn} onPress={onPress}>
+                    <Text style={{
+                            color: 'white', 
                             letterSpacing: 2, 
                             fontSize: 16, 
                             paddingHorizontal: 7, 
                             paddingVertical:10,
                             marginRight: 10, 
-                            marginLeft: 10}
-                        }>Crear cuenta</Text>
-                        
-                    </TouchableOpacity>
-                
+                            marginLeft: 10}}
+                        >{visible & !flag ? 'Iniciando...' : 'Iniciar Sesión'}
+                        </Text>
+                    <Snackbar
+                        style={{position: 'relative', bottom: 40, width: '100%'}}
+                        duration={2000}
+                        visible={visible}
+                        onDismiss={onDismissSnackBar}
+                        action={{
+                            label: flag ? ':(' : ':)',
+                            onPress: () => {
+                            // Do something
+                            },
+                        }}>
+                        { flag ? 'Por favor, completa todos los campos.' : 'Estamos contentos de recibirte nuevamente!' }
+                    </Snackbar>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.buttonUp} onPress={() => props.navigation.navigate("SignUpScreen")}>
+                    <Text style={{
+                        color: '#009387', 
+                        letterSpacing: 2, 
+                        fontSize: 16, 
+                        paddingHorizontal: 7, 
+                        paddingVertical:10,
+                        marginRight: 10, 
+                        marginLeft: 10}
+                    }>Crear cuenta</Text>
+                </TouchableOpacity>
             </Animatable.View>
         </View>
     )

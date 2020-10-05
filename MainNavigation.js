@@ -12,6 +12,7 @@ import MainTabScreen from './screens/MainTabScreen'
 import RootStackScreen from './screens/RootStackScreen';
 import LogOut from './screens/LogOut';
 import { createStackNavigator } from '@react-navigation/stack';
+import Product from './screens/Product'
 
 import { View, Text } from 'react-native-animatable';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -75,6 +76,7 @@ const MainNavigation= (props) => {
           drawerContent = {props => <DrawerContent  {...props} />}>
             <Drawer.Screen name="Main" products ={props.cartItems} component={MainTabScreen} />
             <Drawer.Screen name="LogOut" component={LogOut} />
+            <Drawer.Screen name="Product" component={Product} />
         </Drawer.Navigator>
         :
           <RootStackScreen />

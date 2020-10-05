@@ -7,7 +7,8 @@ const productsActions = {
             const res = await axios.get("http://12545187ac1b.ngrok.io/api/items")
             
             dispatch({
-                type: 'GET_PRODUCTS_USER'
+                type: 'GET_PRODUCTS_USER',
+                payload: res.data.products,
             })
             return res.data.products
         }
