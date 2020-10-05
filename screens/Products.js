@@ -17,7 +17,7 @@ function Products(props, { navigation }) {
     const [selectedValueCategory, setSelectedValueCategory] = useState('Todos');
     const [selectedValuePrice, setSelectedValuePrice] = useState('Todos')
     const [selectedValueStock, setSelectedValueStock] = useState('Todos')
-    const [selectedValueEdit, setSelectedValueEdit] = useState('Stock')
+    const [selectedValueEdit, setSelectedValueEdit] = useState('Price')
 
     const [panel, setPanel] = useState({
         category: "",
@@ -95,11 +95,28 @@ function Products(props, { navigation }) {
                         style={styles.pickerCard}
                         onValueChange={(itemValue) => {setSelectedValueEdit(itemValue)}}
                     >
-                        <Picker.Item label="Stock" value="Stock"/>
                         <Picker.Item label="Price" value="Price"/>
+                        <Picker.Item label="Stock" value="Stock"/>
                     </Picker>
                     </Icon>
 
+                    {(selectedValueEdit === 'Price') &&
+                        <Icon style={styles.iconCart} name="cash-usd">
+                            <Picker
+                                selectedValue={selectedValuePrice}
+                                style={styles.pickerCard}
+                                onValueChange={(itemValue) => {
+                                    setSelectedValuePrice(itemValue)
+                                    cantfiltered(itemValue, "price")
+                                    setSelectedValueStock("Todos")
+                                }}
+                                >
+                                <Picker.Item label="Todos" value="Todos"/>
+                                <Picker.Item label="MasPrice" value="More"/>
+                                <Picker.Item label="MenosPrice" value="Less"/>
+                            </Picker>
+                        </Icon>
+                    }
                     {(selectedValueEdit === 'Stock') &&
                         <Icon style={styles.iconCart} name="database">
                             <Picker
@@ -114,23 +131,6 @@ function Products(props, { navigation }) {
                                 <Picker.Item label="Todos" value="Todos"/>
                                 <Picker.Item label="MasStock" value="More"/>
                                 <Picker.Item label="MenosStock" value="Less"/>
-                            </Picker>
-                        </Icon>
-                    }
-                    {(selectedValueEdit === 'Price') &&
-                        <Icon style={styles.iconCart} name="cash-usd">
-                            <Picker
-                                selectedValue={selectedValuePrice}
-                                style={styles.pickerCard}
-                                onValueChange={(itemValue) => {
-                                    setSelectedValuePrice(itemValue)
-                                    cantfiltered(itemValue, "price")
-                                    setSelectedValueStock("Todos")
-                                }}
-                            >
-                                <Picker.Item label="Todos" value="Todos"/>
-                                <Picker.Item label="MasPrice" value="More"/>
-                                <Picker.Item label="MenosPrice" value="Less"/>
                             </Picker>
                         </Icon>
                     }
