@@ -2,7 +2,8 @@ import AsyncStorage from "@react-native-community/async-storage"
 
 const initialState = {
     username: "",
-    token: ""
+    token: "",
+    isLoading: true
 }
 
 const storeData = async (value) => {
@@ -25,30 +26,33 @@ const deleteData = async () => {
 const usersReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'SET_USER':
-            console.log(typeof(action.payload.token))
-            /* storeData(action.payload.token) */
+           
+            storeData(action.payload.token)
             return {
                 ...state,
                 username: action.payload.username,
-                token: action.payload.token
+                token: action.payload.token,
+                isLoading: false
+
             }
         case 'UPDATE_USER':
 
             return {
                 ...state,
-                name: action.payload.name,
+                isLoading: false,
                 username: action.payload.username,
                 token: action.payload.token,
                 
             }
 
             case "UNLOG_USER_FROM_APP":
-                /* deleteData() */
+                deleteData()
                 return{
                     ...state,
                     username:"",
                     token:"",
-                    name:""
+                    isLoading: false
+
                 }
         default:
             return state

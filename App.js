@@ -43,9 +43,9 @@ const App= (props) => {
    )
   } else {
     return (
-      <Provider store={myStore}>
+
         <AppLoading startAsync={getFonts} onFinish={() => setFontsLoaded(true)} />
-      </Provider>
+
     );
   }
 }

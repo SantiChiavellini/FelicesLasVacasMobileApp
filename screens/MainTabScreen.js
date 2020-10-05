@@ -1,7 +1,7 @@
 import React from "react";
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import Icons from 'react-native-vector-icons/MaterialCommunityIcons';
+
 
 const HomeStack = createStackNavigator();
 const ProductsStack = createStackNavigator();
@@ -16,11 +16,14 @@ import Cart from './Cart';
 import Faqs from './Faqs'
 import Icon from 'react-native-vector-icons/Ionicons'
 
+
 const MainTabScreen= () => {
+  
     return (
         <Tab.Navigator
           initialRouteName="Home"
           activeColor="white"
+          barStyle={{paddingBottom:20, backgroundColor: '#009387'}}
           
         >
           <Tab.Screen
@@ -28,7 +31,7 @@ const MainTabScreen= () => {
             component={HomeStackScreen}
             options={{
               tabBarLabel: 'Inicio',
-              tabBarColor: "#2dbb1e",
+              tabBarColor: "#009387",
               tabBarIcon: ({ color }) => (
                 <Icon name="ios-home" color={color} size={26} />
               ),
@@ -39,7 +42,7 @@ const MainTabScreen= () => {
             component={ProductsStackScreen}
             options={{
               tabBarLabel: 'Productos',
-              tabBarColor:  "#178c0b",
+              tabBarColor:  "#009387",
               tabBarIcon: ({ color }) => (
                 <Icon name="ios-basket" color={color} size={26} />
               ),
@@ -50,7 +53,7 @@ const MainTabScreen= () => {
             component={FaqsStackScreen}
             options={{
               tabBarLabel: 'Como comprar',
-              tabBarColor: "#25b417",
+              tabBarColor: "#009387",
               tabBarIcon: ({ color }) => (
                 <Icon name="md-help-circle" color={color} size={26} />
               ),
@@ -61,7 +64,7 @@ const MainTabScreen= () => {
             component={CartStackScreen}
             options={{
               tabBarLabel: 'Carrito',
-              tabBarColor: "#0b7900",
+              tabBarColor: "#009387",
               tabBarIcon: ({ color }) => (
                 <Icon name="ios-cart" color={color} size={26} />
               ),
@@ -71,13 +74,16 @@ const MainTabScreen= () => {
         </Tab.Navigator>
       )
 }
+/*------------------------------------------------------------------------------------------------------------------------- */
 
-export default MainTabScreen
+
+
+export default (MainTabScreen)
 
 const HomeStackScreen =({navigation}) => (
     <HomeStack.Navigator screenOptions ={{
       headerStyle:{
-        backgroundColor:"#2dbb1e"
+        backgroundColor:"#009387"
       },
       headerTintColor: "white",
       headerTitleStyle:{
@@ -90,65 +96,66 @@ const HomeStackScreen =({navigation}) => (
           <Icon.Button 
           name="ios-menu" 
           size={25}
-          backgroundColor="#2dbb1e"
+          backgroundColor="#009387"
           onPress = {() => {navigation.openDrawer()}}
           ></Icon.Button>
         )
       }} />
     </HomeStack.Navigator>
   )
-  
+  {/*------------------------------------------------------------------------------------------------------------------------*/}
   const ProductsStackScreen =({navigation}) => (
     <ProductsStack.Navigator screenOptions ={{
       headerStyle:{
-        backgroundColor:"#178c0b"
+        backgroundColor:"#009387"
       },
       headerTintColor: "white",
       headerTitleStyle:{
         fontWeight:"bold"
       }
     }}>
-      <ProductsStack.Screen name="Products" component={Products} options={{
+      <ProductsStack.Screen name="Products" component={Products}  options={{
         title: "Productos",
         headerLeft: () =>(
           <Icon.Button 
           name="ios-menu" 
           size={25}
-          backgroundColor="#178c0b"
+          backgroundColor="#009387"
           onPress = {() => {navigation.openDrawer()}}
           ></Icon.Button>
         )
       }} />
     </ProductsStack.Navigator>
   )
-
+/* ------------------------------------------------------------------------------------------------------------------------- */
   const CartStackScreen =({navigation}) => (
     <CartStack.Navigator screenOptions ={{
       headerStyle:{
-        backgroundColor:"#178c0b"
+        backgroundColor:"#009387"
       },
       headerTintColor: "white",
       headerTitleStyle:{
         fontWeight:"bold"
       }
     }}>
-      <CartStack.Screen name="Cart" component={Cart} options={{
+      <CartStack.Screen name="Cart" navigation={navigation} component={Cart} options={{
         title: "Carrito",
         headerLeft: () =>(
           <Icon.Button 
           name="ios-menu" 
           size={25}
-          backgroundColor="#178c0b"
+          backgroundColor="#009387"
           onPress = {() => {navigation.openDrawer()}}
           ></Icon.Button>
         )
       }} />
+      
     </CartStack.Navigator>
   )
   const FaqsStackScreen =({navigation}) => (
     <FaqsStack.Navigator screenOptions ={{
       headerStyle:{
-        backgroundColor:"#178c0b"
+        backgroundColor:"#009387"
       },
       headerTintColor: "white",
       headerTitleStyle:{
@@ -161,7 +168,7 @@ const HomeStackScreen =({navigation}) => (
           <Icon.Button 
           name="ios-menu" 
           size={25}
-          backgroundColor="#178c0b"
+          backgroundColor="#009387"
           onPress = {() => {navigation.openDrawer()}}
           ></Icon.Button>
         )

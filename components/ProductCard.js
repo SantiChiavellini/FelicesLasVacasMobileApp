@@ -109,19 +109,20 @@ const styles = StyleSheet.create({
       height:"100%",
       borderColor:"green",
       backgroundColor:"whitesmoke",
-      borderColor:"#2dbb1e",
+      borderColor:"#009387",
       borderWidth: 2,
       overflow:"hidden",
       margin:10,
       justifyContent:"center",
       alignItems:"center",
+      borderRadius:30
       
     },
     CardImg:{
       width:150,
       height: 150,
       borderRadius: 20,
-      borderColor:"#2dbb1e",
+      borderColor:"#009387",
       borderWidth: 2,
       
     },
@@ -139,7 +140,7 @@ const styles = StyleSheet.create({
       flex:1
     },
     textInput:{
-      backgroundColor: "#2dbb1e",
+      backgroundColor: "#009387",
       padding:10,
       fontSize:15,
       color:"whitesmoke",
@@ -168,7 +169,7 @@ const styles = StyleSheet.create({
       color:"whitesmoke",
       fontSize:30,
       textAlign: "center",
-      backgroundColor:"#2dbb1e",
+      backgroundColor:"#009387",
       width:70,
       paddingHorizontal:10,
       paddingVertical:5,
@@ -177,13 +178,13 @@ const styles = StyleSheet.create({
     },
     iconCard:{
       fontSize:50,
-      color:"#2dbb1e"
+      color:"#009387"
     },
     titleCard:{
       textAlign: "center",
       color:"whitesmoke",
       paddingHorizontal:10,
-      backgroundColor:"#2dbb1e",
+      backgroundColor:"#009387",
       borderRadius:10,
       borderColor:"transparent",
       borderWidth: 1,
@@ -191,14 +192,14 @@ const styles = StyleSheet.create({
     },
     priceCard:{
         textAlign:"center",
-        color:"#2dbb1e"
+        color:"#009387"
     },
     iconCart:{
-        color:"#2dbb1e",
+        color:"#009387",
         fontSize:20,
         textAlign:"center",
         borderRadius:10,
-        borderColor:"#2dbb1e",
+        borderColor:"#009387",
         borderWidth: 2,
         overflow:"hidden",
         marginTop:10,

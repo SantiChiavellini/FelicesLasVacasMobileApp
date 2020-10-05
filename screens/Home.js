@@ -10,11 +10,9 @@ import { StyleSheet,
 import { connect } from "react-redux";
 import productsActions from '../redux/actions/productsActions'
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
-import { Card, Title, Paragraph } from 'react-native-paper';
-import Icon from 'react-native-vector-icons/Ionicons'
-import { color } from "react-native-reanimated";
 import ProductCard from "../components/ProductCard"
-
+import * as Animatable from 'react-native-animatable';
+import { ActivityIndicator } from "react-native-paper";
 
 
 function Home(props, { navigation }) {
@@ -31,7 +29,7 @@ function Home(props, { navigation }) {
       setTopProducts(popular) 
     }
     fetchData()
-    console.log("hola")
+    
   
   }, [])
 
@@ -44,18 +42,32 @@ function Home(props, { navigation }) {
     <View style={styles.viewGeneral}>
       <ImageBackground source={require('../assets/BANDA.png')} style={styles.image}>
        
-       <Image
+       <Animatable.View
+        animation={"slideInDown"}
+        duration={2000}
+       >
+          <Image
           style={styles.logo}
           source={{
             uri:'https://i.postimg.cc/y84JL83W/logo.png'
           }}
         />
+       </Animatable.View>
+       
        
       </ImageBackground>
-      <View>
-        <Text style={styles.subtitle}>Productos Destacados</Text>
+      <View style={styles.subtitle}>
+        <Animatable.Text 
+          style={styles.textSub} 
+          
+          animation={"slideInLeft"}
+          duration={2000} 
+        >Productos Destacados</Animatable.Text>
       </View>
-      <View style={styles.viewCart}>
+      <Animatable.View 
+        style={styles.viewCart}
+        
+      >
         {topProducts.length !== 0 ?
           <FlatList 
           style={styles.list}
@@ -64,10 +76,12 @@ function Home(props, { navigation }) {
           keyExtractor={item => item._id}
           />
           :
-          <Text>Loading</Text>
+          <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
+            <ActivityIndicator size="large" color="white"/>
+          </View>
         }
+      </Animatable.View>
       </View>
-    </View>
   );
 }
 
@@ -105,19 +119,22 @@ const styles = StyleSheet.create({
     margin: 4
   },
   subtitle:{
+    
+    backgroundColor:"#009387",
+    padding: 10,
+    
+  },
+  textSub:{
     textAlign: "center",
     fontSize:30,
-    backgroundColor:"#2dbb1e",
-    padding: 10,
     color: "white"
   },
-  
   containerCard:{
     flex: 1,
     height:"100%",
     borderColor:"green",
     backgroundColor:"whitesmoke",
-    borderColor:"#2dbb1e",
+    borderColor:"#009387",
     borderWidth: 2,
     overflow:"hidden",
     margin:10,
@@ -129,7 +146,7 @@ const styles = StyleSheet.create({
     width:150,
     height: 150,
     borderRadius: 20,
-    borderColor:"#2dbb1e",
+    borderColor:"#009387",
     borderWidth: 2,
     
   },
@@ -143,11 +160,11 @@ const styles = StyleSheet.create({
     flex:1
   },
   viewCart:{
-    backgroundColor:"green",
+    backgroundColor:"#00544d",
     flex:1
   },
   textInput:{
-    backgroundColor: "#2dbb1e",
+    backgroundColor: "#009387",
     padding:10,
     fontSize:15,
     color:"whitesmoke",
@@ -176,7 +193,7 @@ const styles = StyleSheet.create({
     color:"whitesmoke",
     fontSize:30,
     textAlign: "center",
-    backgroundColor:"#2dbb1e",
+    backgroundColor:"#009387",
     width:70,
     paddingHorizontal:10,
     paddingVertical:5,
@@ -185,13 +202,13 @@ const styles = StyleSheet.create({
   },
   iconCart:{
     fontSize:50,
-    color:"#2dbb1e"
+    color:"#009387"
   },
   titleCart:{
     textAlign: "center",
     color:"whitesmoke",
     paddingHorizontal:10,
-    backgroundColor:"#2dbb1e",
+    backgroundColor:"#009387",
     borderRadius:20,
     borderRadius:10,
     borderColor:"transparent",

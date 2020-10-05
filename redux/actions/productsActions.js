@@ -4,7 +4,7 @@ const productsActions = {
     getProducts: () => {
         return async (dispatch, getState) => {
             
-            const res = await axios.get("http://91db59da2035.ngrok.io/api/items")
+            const res = await axios.get("http://12545187ac1b.ngrok.io/api/items")
             
             dispatch({
                 type: 'GET_PRODUCTS_USER'
@@ -14,7 +14,7 @@ const productsActions = {
     },
     getProductById: (idProduct) => {
         return async (dispatch, getState) => {
-            const res = await axios.get("http://91db59da2035.ngrok.io/api/items/"+idProduct)
+            const res = await axios.get("http://12545187ac1b.ngrok.io/api/items/"+idProduct)
             
             dispatch({
                 type: "GET_PRODUCT"

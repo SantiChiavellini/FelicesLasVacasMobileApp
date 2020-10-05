@@ -22,7 +22,7 @@ const SplashScreen = ({navigation}) => {
           // clear error
         }
       
-        console.log('Done.')
+
       }
       
       clearAll()  
@@ -40,6 +40,7 @@ const SplashScreen = ({navigation}) => {
           <Animatable.View 
             style={styles.footer}
             animation="fadeInUpBig"
+            delay={1500}
           >
                 <Text style={styles.title}>Quedate en casa, nosotros te lo llevamos</Text>
                 <Text style={styles.text}>Inicia sesión o créate una cuenta</Text>

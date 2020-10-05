@@ -51,7 +51,8 @@ function SignIn( props,{navigation} ) {
 
     const onPress = async e => {
       e.preventDefault()
-      await props.createUser(user)
+      const res = await props.createUser(user)
+      console.log(res)
       setVisible(!visible)
     }
 
@@ -308,7 +309,7 @@ const styles = StyleSheet.create({
         paddingBottom: 50
     },
     footer: {
-        flex: 3,
+        flex: 5,
         backgroundColor: '#fff',
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,

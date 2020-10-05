@@ -6,64 +6,146 @@ import { connect } from 'react-redux';
 import ProductCart from '../components/ProductCart';
 import { globalStyles } from '../styles/globalStyles'
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
-import { Card, Title} from 'react-native-paper';
+import productsActions from '../redux/actions/productsActions';
+import { NavigationEvents } from 'react-navigation';
+import { useFocusEffect, useIsFocused } from '@react-navigation/native';
 
-function Cart(props, { navigation }) {
 
-
-  useEffect(()=>{
-    console.log(props)
+const Cart =(props) => {
   
+  const [cartContent, setCartContent] = useState(props.cartProducts)
+  const [subTotal, setSubTotal] = useState(0)
+  
+ 
+  
+  useFocusEffect(()=>{
+    setCartContent(props.cartProducts)
+    var subTot= props.countTotal
+    setSubTotal(subTot)
+    
+  })
+
+  useIsFocused(() =>{
+    setCartContent(props.cartProducts)
+    var subTot= props.countTotal
+    setSubTotal(subTot)
   })
   
-  if (props.cartProducts.length !== 0) {
-  return (
+  
+  
+  return(
     
-    <View style={globalStyles.container}>
-      <View style={styles.viewCart}>
-          <FlatList 
-          style={styles.list}
-          data={props.cartProducts}
-          renderItem={(item) => <ProductCart prod={item}/>}
-          keyExtractor={item => (item._id)}
-          />
+    <View style={styles.container}>
+      
+      <View style={styles.header}>
+        <View style={styles.viewCart}>
+          
+          <View style={styles.viewCart}>
+            <FlatList 
+            style={styles.list}
+            ListEmptyComponent= {() =>(<Text>El carrito esta vacio</Text>)}
+            data={cartContent}
+            renderItem={(item) => <ProductCart prod={item}/>}
+            keyExtractor={item => (item.product._id)}
+            
+            />
+          </View>
+        
+        </View>
+      </View>
+      <View style={styles.cartFooter}>
+            <View style={styles.containerTotal}>
+              <Text style={styles.textTotal}>Total:$ {subTotal} </Text>
+              <TouchableOpacity 
+              style={styles.deleteBtn}>
+                <Text style={styles.deleteBtnText}>Vaciar</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.containerFinish}>
+            <TouchableOpacity style={styles.finishBtn}>
+                <Text style={styles.finishBtnText}>Finalizar Compra</Text>
+              </TouchableOpacity>
+            </View>
+              
       </View>
     </View>
-  );
-  }else{
-    return(
-      <View style={globalStyles.container}>
-      <View style={styles.viewCart}>
-        <FlatList 
-          style={styles.list}
-          data={["El carrito esta vacio"]}
-          renderItem={(item) => 
-          <Card style={styles.containerCard}>
-            <Card.Content >
-              <Title>"El carrito esta vacio"</Title>
-            </Card.Content>
-          </Card>
-          }
-          keyExtractor={item => (item._id)}
-          />
-      </View>
-    </View>
-    )
-  }
+  )
+
+  
+}
+
+
+const mapDispatchToProps ={
+forceCart: productsActions.forcedCart
 }
 
 const mapStateToProps = (state) =>{
+  var countTotal = 0
+ state.productsRed.cartProducts.map(product =>{
+   countTotal += (parseInt(product.quantity) * parseInt(product.product.price))
+ })
   
   return {
-    cartProducts: state.productsRed.cartProducts
+    cartProducts: state.productsRed.cartProducts,
+    countTotal
   }
 }
 
-export default connect (mapStateToProps)(Cart)
+export default connect(mapStateToProps, mapDispatchToProps)(Cart)
 
 const styles = StyleSheet.create({
-  container: {
-    paddingTop: 50,
+  container:{
+    flex:1,
+    backgroundColor:"#009387"
+  },
+  
+  header: {
+    flex:5,
+    
+    width:"100%"
+  },
+  containerTotal:{
+    flexDirection:"row",
+    justifyContent:"space-between",
+    alignItems:"center"
+  },
+  textTotal:{
+    color:"#009387",
+    fontSize:20
+  },
+  cartFooter:{
+    flex:1,
+    backgroundColor: '#fff',
+    paddingVertical: 10,
+    paddingHorizontal: 30,
+    overflow:"hidden"
+  },
+  deleteBtn:{
+    backgroundColor:"red",
+    paddingHorizontal:15,
+    paddingVertical:10,
+    borderRadius:20
+  },
+  deleteBtnText:{
+    color:"whitesmoke",
+    fontSize:15
+  },
+  containerFinish:{
+    flex:1,
+    justifyContent: "center",
+    alignItems:"center"
+  },
+  finishBtn:{
+    backgroundColor: "#009387",
+    paddingHorizontal:80,
+    paddingVertical:15,
+    borderRadius: 30,
+    marginTop:10
+
+  },
+  finishBtnText:{
+    color:"whitesmoke",
+    fontSize:20
   },
   image: {
     width: "100%",
@@ -84,7 +166,7 @@ const styles = StyleSheet.create({
   subtitle:{
     textAlign: "center",
     fontSize:30,
-    backgroundColor:"#2dbb1e",
+    backgroundColor:"#009387",
     padding: 10,
     color: "white"
   },
@@ -92,9 +174,9 @@ const styles = StyleSheet.create({
   containerCard:{
     flex: 1,
     height:"100%",
-    borderColor:"green",
+    borderColor:"#009387",
     backgroundColor:"whitesmoke",
-    borderColor:"#2dbb1e",
+    borderColor:"#009387",
     borderWidth: 2,
     overflow:"hidden",
     margin:10,
@@ -106,7 +188,7 @@ const styles = StyleSheet.create({
     width:150,
     height: 150,
     borderRadius: 20,
-    borderColor:"#2dbb1e",
+    borderColor:"#009387",
     borderWidth: 2,
     
   },
@@ -120,60 +202,8 @@ const styles = StyleSheet.create({
     flex:1
   },
   viewCart:{
-    backgroundColor:"green",
+    backgroundColor:"#00544d",
     flex:1
-  },
-  textInput:{
-    backgroundColor: "#2dbb1e",
-    padding:10,
-    fontSize:15,
-    color:"whitesmoke",
-    width:50,
-    borderRadius:100,
-    textAlign: "center",
-    
-
-  },
-  inputView:{
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 20,
-    flex:1,
-    width:"100%"
-    
-  },
-  button:{
-    marginLeft:20,
-    marginRight:20,
-    textAlign: "center",
-    
-  },
-  textButton:{
-    color:"whitesmoke",
-    fontSize:30,
-    textAlign: "center",
-    backgroundColor:"#2dbb1e",
-    width:70,
-    paddingHorizontal:10,
-    paddingVertical:5,
-    borderRadius:100
-    
-  },
-  iconCart:{
-    fontSize:50,
-    color:"#2dbb1e"
-  },
-  titleCart:{
-    textAlign: "center",
-    color:"whitesmoke",
-    paddingHorizontal:10,
-    backgroundColor:"#2dbb1e",
-    borderRadius:20,
-    borderRadius:10,
-    borderColor:"transparent",
-    borderWidth: 1,
-    overflow:"hidden"
   }
   
 });
