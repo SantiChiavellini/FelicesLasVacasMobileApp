@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
 
   nutritionalBox: {
     width: "45%",
-    height: 140,
+    height: 160,
     flex: 1,
   },
 
