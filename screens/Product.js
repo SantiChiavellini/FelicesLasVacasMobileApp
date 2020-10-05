@@ -30,14 +30,13 @@ const Product = (props) => {
             }}
           />
         </ImageBackground>
-        <Image
+        {/* <Image
           style={styles.imageBanner}
           source={require("../assets/Images/productos.jpg")}
-        />
+        /> */}
 
         {/* Producto renderizado */}
         <View style={styles.middleBox}>
-          
           {/* Foto del producto renderizado */}
           <Image
             style={styles.imageBox}
@@ -48,28 +47,30 @@ const Product = (props) => {
 
           {/* Características del producto */}
           <View style={styles.caracteristicsBox}>
-            {/* Categoría + Información nutricional */}
             {/* Categoría */}
             <View style={styles.categoryBox}>
               {/* Nombre del producto */}
               <Text style={styles.title}>{props.route.params.name}</Text>
-              <Text style={styles.text}>Categoría: Productos {props.route.params.category}</Text>
-            </View>
-
-            {/* Imagen de información nutricional */}
-            <View style={styles.nutritionalBox}>
-              <Image
-                style={styles.nutritionalImg}
-                source={{
-                  uri: `${props.route.params.photo1}`,
-                }}
-              />
+              <Text style={styles.text}>
+                Categoría: Productos {props.route.params.category}
+              </Text>
             </View>
           </View>
 
           <View style={styles.descriptionBox}>
-            <Text style={styles.text}>Descripción:</Text>
+            <Text style={styles.destacatedText}>Descripción:</Text>
             <Text style={styles.text}>{props.route.params.description}</Text>
+          </View>
+
+          {/* Imagen de información nutricional */}
+          <View style={styles.nutritionalBox}>
+            <Text style={styles.destacatedText}>Información nutricional:</Text>
+            <Image
+              style={styles.nutritionalImg}
+              source={{
+                uri: `${props.route.params.photo1}`,
+              }}
+            />
           </View>
         </View>
       </ScrollView>
@@ -86,7 +87,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 170,
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "flex-start",
     resizeMode: "stretch",
   },
 
@@ -102,41 +103,49 @@ const styles = StyleSheet.create({
   },
 
   imageBox: {
-    width: "80%",
-    height: 270,
+    width: "100%",
+    height: 390,
     resizeMode: "stretch",
-    borderColor: "black",
+    borderColor: "#009387",
     borderWidth: 2,
     marginTop: 10,
-    marginBottom: 15,
+    marginBottom: 20,
   },
 
   title: {
-    fontFamily: 'karla-regular',
-    color: "black",
-    fontSize: 26,
-    fontWeight: 'bold'
+    fontFamily: "karla-regular",
+    color: "#009387",
+    fontSize: 31,
+    fontWeight: "bold",
+    letterSpacing: 0.3,
   },
 
   text: {
-    fontFamily: 'karla-regular',
-    color: 'black',
-    fontSize: 14,
+    fontFamily: "karla-regular",
+    color: "black",
+    fontSize: 20,
     marginVertical: 5,
     lineHeight: 20,
-    letterSpacing: 1
+    letterSpacing: 0.3,
+  },
+
+  destacatedText: {
+    fontFamily: "karla-regular",
+    color: "#009387",
+    fontSize: 23,
+    marginVertical: 5,
+    lineHeight: 20,
+    letterSpacing: 0.3,
+    fontWeight: "bold",
+    paddingTop: 5,
   },
 
   /* Características del producto */
 
   caracteristicsBox: {
     width: "100%",
-    minHeight: 130,
+    minHeight: 80,
     flex: 1,
-    flexWrap: "wrap",
-    flexDirection: "row",
-    marginBottom: 10,
-    
   },
 
   /* Categoría + Información nutricional */
@@ -144,16 +153,16 @@ const styles = StyleSheet.create({
   /* Categoría */
 
   categoryBox: {
-    width: "55%",
-    height: 140,
+    width: "90%",
+    minHeight: 80,
     flex: 1,
   },
 
   /* Imagen de información nutricional */
 
   nutritionalBox: {
-    width: "45%",
-    height: 160,
+    width: "100%",
+    height: 230,
     flex: 1,
   },
 
@@ -166,8 +175,8 @@ const styles = StyleSheet.create({
 
   descriptionBox: {
     marginTop: 20,
+    marginBottom: 20,
   },
-  
 });
 
 export default Product;
