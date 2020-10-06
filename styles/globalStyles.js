@@ -75,14 +75,47 @@ export const globalStyles = StyleSheet.create({
     },
     firstRes: {
         maxWidth: '90%',
-        textAlign: 'justify'
+        textAlign: 'left',
+        marginBottom:10,
+        lineHeight:19,
+        fontSize:15
     },
     titleFaq: {
-        paddingLeft: 30,
+        textAlign:"center",
+        width:"100%",
+        backgroundColor:"#009387",
         borderBottomColor: '#13aa52',
-        borderBottomWidth: 2,
-        width: '90%',
-        marginLeft: 15,
-        color: 'green'
-    }
+        paddingVertical:10,
+        
+        
+        color: 'whitesmoke'
+    },
+    viewQuestion:{
+        marginBottom:10,
+        marginRight:20
+    },
+    howBuyText:{
+        marginBottom:10,
+        lineHeight:19,
+        fontSize:15
+    },
+    number:{
+        fontWeight:"bold"
+    },
+    image: {
+        width: "100%",
+        height: 170,
+        justifyContent:"center",
+        alignItems:"center",
+        resizeMode: 'stretch',
+      },
+      title:{
+       color:"white",
+        fontSize: 0
+      },
+      logo:{
+        width:140,
+        height:140,
+        margin: 4
+      },
 })
