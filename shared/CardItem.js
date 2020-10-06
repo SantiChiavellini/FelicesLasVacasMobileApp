@@ -10,12 +10,13 @@ const CardItem = (props) => (
     <Card>
       <Card.Cover source={{ uri: `${props.product.photo}` }} />
       <Card.Content style={styles.cardBody}>
+      <Title style={styles.titleBox}>{props.product.name}</Title>
         <Paragraph style={styles.slot}>
             <Text>
-              ${props.product.price}
+              ${props.product.price} c/u
             </Text>
         </Paragraph>
-        <Title style={styles.titleBox}>{props.product.name}</Title>
+        
       </Card.Content>
     </Card>
   
@@ -27,15 +28,18 @@ const styles = StyleSheet.create({
     paddingTop: 15,
   },
   titleBox: {
-    minHeight: 105,
+    minHeight: 60,
     flex: 1,
-    flexShrink: 0
+    flexShrink: 0,
+    fontSize:15,
+    color:"#009387"
   },
   slot: {
     minHeight: 30,
     alignItems: 'flex-end',
-    marginTop: 10,
+    color:"#009387",
     fontSize: 20,
+    textAlign:"right"
 
   },
 });

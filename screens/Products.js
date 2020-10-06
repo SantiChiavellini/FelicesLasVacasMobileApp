@@ -2,7 +2,7 @@ import { StatusBar } from "expo-status-bar"
 import React, { useEffect, useState } from "react"
 import { connect } from "react-redux"
 import { StyleSheet, Text, View } from "react-native"
-import { Picker } from '@react-native-community/picker'
+import { Picker } from 'react-native'
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler"
 import { globalStyles } from "../styles/globalStyles"
 import productsActions from "../redux/actions/productsActions"
@@ -11,13 +11,12 @@ import { Card, Title} from 'react-native-paper'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { color } from "react-native-reanimated"
 import { Navigation } from "swiper"
-
+import RNPickerSelect from 'react-native-picker-select';
 function Products(props, { navigation }) {
 
     const [selectedValueCategory, setSelectedValueCategory] = useState('Todos');
-    const [selectedValuePrice, setSelectedValuePrice] = useState('Todos')
-    const [selectedValueStock, setSelectedValueStock] = useState('Todos')
-    const [selectedValueEdit, setSelectedValueEdit] = useState('Price')
+    const [selectedValueOrder, setSelectedValueOrder] = useState("0")
+   
 
     const [panel, setPanel] = useState({
         category: "",
@@ -39,21 +38,43 @@ function Products(props, { navigation }) {
     }, [])
 
     const filterCategory = (value) => {
-
-        let itemsFiltered
-
-        (value !== 'Todos') 
-            ? itemsFiltered = panel.items.filter(item=>(item.category === value)) 
-            : itemsFiltered = panel.items
+        
+        
+            
+        let itemsFiltered 
+       
+        value !== 'Todos'
+        ? 
+        itemsFiltered = panel.items.filter(item=>(item.category === value)) 
+        : 
+        itemsFiltered = panel.items
 
         setPanel({
             ...panel,
             filteredItems: itemsFiltered
         })
+
+        switch (selectedValueOrder){
+            case 0: 
+                    
+            case 1:
+                cantfiltered("More", "price")
+                break
+            case 2:
+                cantfiltered("Less", "price")
+                break
+            case 3:
+                cantfiltered("More", "views")
+                break
+            case 4:
+                cantfiltered("Less", "views")
+                break
+        }
+        
     }
 
     const cantfiltered = (filtered, value) => {
-
+        filterCategory(selectedValueCategory)
         let itemsFiltered = panel.filteredItems
         
         if(filtered === 'More') itemsFiltered.sort((a,b) => b[value] - a[value])
@@ -65,78 +86,93 @@ function Products(props, { navigation }) {
         })
     }
 
+    
+
     return (
         <>
             <View style={globalStyles.container}>
-                <Text>Soy Products</Text>
+                
                 <StatusBar style="auto" />
+                <View style={{flex:1}}>
+             <Card  style={{flex:1, borderRadius:20, borderColor:"#009387", borderWidth:2}} >
 
-                <Card style={styles.containerCard}>
-
-                    <Icon style={styles.iconCart} name="filter">
-                    <Picker
-                        selectedValue={selectedValueCategory}
-                        style={styles.pickerCard}
-                        onValueChange={(itemValue) => {
-                            setSelectedValueCategory(itemValue)
-                            filterCategory(itemValue)
-                        }}
-                    >
-                        <Picker.Item label="Todos" value="Todos"/>
-                        <Picker.Item label="Secos" value="Secos"/>
-                        <Picker.Item label="Refrigerados" value="Refrigerados"/>
-                        <Picker.Item label="Congelados" value="Congelados"/>
-                    </Picker>
-                    </Icon>
-
-                    <Icon style={styles.iconCart} name='circle-edit-outline'>
-                    <Picker
-                        selectedValue={selectedValueEdit}
-                        style={styles.pickerCard}
-                        onValueChange={(itemValue) => {setSelectedValueEdit(itemValue)}}
-                    >
-                        <Picker.Item label="Price" value="Price"/>
-                        <Picker.Item label="Stock" value="Stock"/>
-                    </Picker>
-                    </Icon>
-
-                    {(selectedValueEdit === 'Price') &&
-                        <Icon style={styles.iconCart} name="cash-usd">
-                            <Picker
-                                selectedValue={selectedValuePrice}
-                                style={styles.pickerCard}
-                                onValueChange={(itemValue) => {
-                                    setSelectedValuePrice(itemValue)
-                                    cantfiltered(itemValue, "price")
-                                    setSelectedValueStock("Todos")
-                                }}
-                                >
-                                <Picker.Item label="Todos" value="Todos"/>
-                                <Picker.Item label="MasPrice" value="More"/>
-                                <Picker.Item label="MenosPrice" value="Less"/>
-                            </Picker>
-                        </Icon>
-                    }
-                    {(selectedValueEdit === 'Stock') &&
-                        <Icon style={styles.iconCart} name="database">
-                            <Picker
-                                selectedValue={selectedValueStock}
-                                style={styles.pickerCard}
-                                onValueChange={(itemValue) => {
-                                    setSelectedValueStock(itemValue)
-                                    cantfiltered(itemValue, "stock")
-                                    setSelectedValuePrice("Todos")
-                                }}
-                                >
-                                <Picker.Item label="Todos" value="Todos"/>
-                                <Picker.Item label="MasStock" value="More"/>
-                                <Picker.Item label="MenosStock" value="Less"/>
-                            </Picker>
-                        </Icon>
-                    }
-                </Card>
-
-                {/* FlatList con los productos */}
+            <View style={{flex:1, flexDirection:"row", alignItems:"center", justifyContent:"center"}}>
+            
+                <View style={styles.viewPicker}>
+                    
+                <RNPickerSelect
+                    style={pickerStyle}
+                    placeholder={{label:"Filtrar por categoria: "}}
+                    onValueChange={(value) => {
+                        switch (value){
+                            case "Todos":
+                                setSelectedValueCategory("Todos")
+                                filterCategory("Todos")
+                                break
+                            case "Secos":
+                                setSelectedValueCategory("Secos")
+                                filterCategory("Secos")
+                                break
+                            case "Refrigerados":
+                                setSelectedValueCategory("Refrigerados")
+                                filterCategory("Refrigerados")
+                                break
+                            case "Congelados":
+                                setSelectedValueCategory("Congelados")
+                                filterCategory("Congelados") 
+                                break      
+                        }
+                    }}
+                    items={[
+                        { label:"Todos", value:"Todos" },
+                        { label:"Secos", value:"Secos" },
+                        { label:"Refrigerados", value:"Refrigerados" },
+                        { label:"Congelados", value:"Congelados" }
+                    ]}
+                    
+                />
+                </View>
+                <Icon name="arrow-down-bold-circle-outline" size={24} color="#009387" />
+            </View>
+            <View style={{flex:1, flexDirection:"row", alignItems:"center",justifyContent:"center"}}>
+                
+                <View style={styles.viewPicker}>
+                <RNPickerSelect
+                    style={pickerStyle}
+                    placeholder={{label:"Ordenar por:"}}
+                    onValueChange={(value) => {
+                        switch (value){
+                            case "Mp":
+                                setSelectedValueOrder("1")   
+                                cantfiltered("More", "price")
+                                break
+                            case "mp":
+                                setSelectedValueOrder("2")
+                                cantfiltered("Less", "price")
+                                break
+                            case "Mv":
+                                setSelectedValueOrder("3")
+                                cantfiltered("More", "views")
+                                break
+                            case "mv":
+                                setSelectedValueOrder("4")
+                                cantfiltered("Less", "views")
+                                break       
+                        }}}
+                    items={[
+                        { label: 'Mayor precio', value: 'Mp' },
+                        { label: 'Menor Precio', value: 'mp' },
+                        { label: 'Mas vendidos', value: 'Mv' },
+                        { label: 'Menos vendidos', value: 'mv' }
+                    ]}
+                />
+                </View>
+                <Icon name="arrow-down-bold-circle-outline" size={24} color="#009387" />
+                </View>
+            </Card> 
+                </View>
+                <View style={{flex:3}}>
+                
                 <View style={styles.container}>
                 <FlatList
                     key={"#"}
@@ -152,17 +188,37 @@ function Products(props, { navigation }) {
                     keyExtractor={(item) => "#" + item._id}
                 />
                 </View>
+                </View>
             </View>
         </>
     );
 }
 
+
+const pickerStyle={
+    inputIOS: {
+		color: '#009387',
+        textAlign: "center",
+        fontSize:20
+	},
+}
+
 const styles = StyleSheet.create({
     container: {
         width: "100%",
-        height: 430,
-        padding: 7,
+        padding: 2,
         marginTop: StatusBar.currentHeight || 0,
+    },
+    viewPicker:{
+        
+        backgroundColor:"transparent", 
+        width:"80%", 
+        justifyContent:"center",         
+        paddingVertical:10, 
+        borderRadius:20,
+        borderColor:"#009387",
+        borderWidth:2
+            
     },
     boxItem: {
         width: "50%",
@@ -180,7 +236,7 @@ const styles = StyleSheet.create({
     containerCard:{
         flex: 1,
         borderColor:"green",
-        backgroundColor:"whitesmoke",
+        backgroundColor:"red",
         borderColor:"#2dbb1e",
         borderWidth: 2,
         margin:10,
@@ -192,11 +248,7 @@ const styles = StyleSheet.create({
         textAlign:"center",    
         overflow:"hidden",
         margin: 5,
-    },
-    pickerCard:{ 
-        height: 18,
-        width: 150,
-        borderColor:"#2dbb1e",
+        flex:1
     }
 });
 
