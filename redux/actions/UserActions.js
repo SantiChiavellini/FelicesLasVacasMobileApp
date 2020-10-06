@@ -5,8 +5,13 @@ const UserActions = {
 
   createUser: (newUser) => {
       return async (dispatch, getState) => {
+<<<<<<< HEAD
         const res = await axios.post("http://localhost:4000/api/users", newUser)
         console.log(res.data)
+=======
+        const res = await axios.post("http://12545187ac1b.ngrok.io/api/users", newUser)
+        
+>>>>>>> 1a99ccb97ab71d8d5d6cf0665d6cba3869bb0f38
         const error ={
           mail:"",
           username:""
@@ -27,11 +32,10 @@ const UserActions = {
             type: "SET_USER",
             payload: {  
               username: res.data.response.username,
-              token: res.data.response.token,
-              role: res.data.response.role
+              token: res.data.response.token
             },
           });
-          console.log(res.data)
+          
           return {
               success: true,
               username: res.data.response.name
@@ -43,8 +47,13 @@ const UserActions = {
 
   logUser: (user) => {
     return async (dispatch, getState) => {
+<<<<<<< HEAD
       const res = await axios.post("http://127.0.0.1:4000/api/user", user )
       console.log(res.data)
+=======
+      const res = await axios.post("http://12545187ac1b.ngrok.io/api/user", user )
+      
+>>>>>>> 1a99ccb97ab71d8d5d6cf0665d6cba3869bb0f38
 
       if (res.data.success !== true) {
         return res.data.message
@@ -52,7 +61,14 @@ const UserActions = {
         //alert
           dispatch({
               type: "SET_USER",
+<<<<<<< HEAD
               payload: res.data.response
+=======
+              payload: {
+                username: res.data.response.username,
+                token: res.data.response.token
+              }
+>>>>>>> 1a99ccb97ab71d8d5d6cf0665d6cba3869bb0f38
           })
           return {
             success: true,
@@ -61,6 +77,32 @@ const UserActions = {
       }
     };
   },
-
+  forcedLogIn: token => {
+    
+    return async (dispatch, getState) => {
+        const res = await axios.get('http://12545187ac1b.ngrok.io/api/tokenVerificator', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+       
+        dispatch({
+            type: "SET_USER",
+            payload: {
+                username: res.data.response.username,
+                token: token,
+                name: res.data.response.name
+            }
+        })
+        return res.data.response.username
+    }
+  },
+  unlogUser : () => {
+    return (dispatch, getState) =>{
+        dispatch({
+            type: "UNLOG_USER_FROM_APP"
+        })
+    }
+  },
 }
 export default UserActions
