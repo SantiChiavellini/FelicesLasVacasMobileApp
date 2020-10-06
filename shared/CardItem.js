@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     paddingTop: 15,
   },
   titleBox: {
-    minHeight: 60,
+    minHeight: 115,
     flex: 1,
     flexShrink: 0,
     fontSize:15,

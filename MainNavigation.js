@@ -16,10 +16,10 @@ import Product from './screens/Product'
 
 import { View, Text } from 'react-native-animatable';
 import AsyncStorage from '@react-native-community/async-storage';
-import ModifyAccount from './screens/ModifyAccount'
+
 import { ActivityIndicator } from 'react-native-paper';
 import UserActions from './redux/actions/UserActions';
-import Cart from './screens/Cart';
+import FinishBuy from './screens/FinishBuy'
 
 
 
@@ -77,6 +77,7 @@ const MainNavigation= (props) => {
             <Drawer.Screen name="Main" products ={props.cartItems} component={MainTabScreen} />
             <Drawer.Screen name="LogOut" component={LogOut} />
             <Drawer.Screen name="Product" component={Product} />
+            <Drawer.Screen name="FinishBuy" component={FinishBuy} />
         </Drawer.Navigator>
         :
           <RootStackScreen />

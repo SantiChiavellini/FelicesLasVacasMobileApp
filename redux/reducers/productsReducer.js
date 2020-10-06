@@ -111,6 +111,13 @@ const getMyObject = async () => {
                 ...state,
                 cartProducts: newProducts
             }
+        case "DELETE_CART":
+
+            return{
+                ...state,
+                cartProducts:[]
+            }
+
         /* case "FORCE_CART":
 
             setTimeout(async () => {

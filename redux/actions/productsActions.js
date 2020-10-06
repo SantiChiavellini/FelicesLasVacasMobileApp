@@ -67,6 +67,28 @@ const productsActions = {
                 type: "FORCE_CART"
             })
         }
+    },
+    deleteAllProducts:()=>{
+        return async(dispatch, getState)=>{
+            dispatch({
+                type:"DELETE_CART"
+            })
+        }
+    },
+    confirm:(products, token) =>{
+        return async (dispatch, getState)=>{
+            console.log(products, token)
+            const res = await axios.post("http://12545187ac1b.ngrok.io/api/shopConfirm/",products
+            , {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            dispatch({
+                type:"DELETE_CART"
+            }) 
+            console.log(res)
+        }
     }
 }
 

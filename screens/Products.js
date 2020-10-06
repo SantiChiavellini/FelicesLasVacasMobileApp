@@ -73,8 +73,8 @@ function Products(props, { navigation }) {
         
     }
 
-    const cantfiltered = (filtered, value) => {
-        filterCategory(selectedValueCategory)
+    const cantfiltered = async (filtered, value) => {
+        await filterCategory(selectedValueCategory)
         let itemsFiltered = panel.filteredItems
         
         if(filtered === 'More') itemsFiltered.sort((a,b) => b[value] - a[value])

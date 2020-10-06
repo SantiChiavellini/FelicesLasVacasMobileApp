@@ -43,7 +43,7 @@ const Cart =(props) => {
           <View style={styles.viewCart}>
             <FlatList 
             style={styles.list}
-            ListEmptyComponent= {() =>(<Text>El carrito esta vacio</Text>)}
+            ListEmptyComponent= {() =>(<Text style={{marginTop:80, color:"whitesmoke", fontSize:"50", textAlign:"center"}}>El carrito esta vacio :(</Text>)}
             data={cartContent}
             renderItem={(item) => <ProductCart prod={item}/>}
             keyExtractor={item => (item.product._id)}
@@ -57,12 +57,15 @@ const Cart =(props) => {
             <View style={styles.containerTotal}>
               <Text style={styles.textTotal}>Total:$ {subTotal} </Text>
               <TouchableOpacity 
-              style={styles.deleteBtn}>
+              style={styles.deleteBtn}
+              onPress={() => props.deleteCart()}>
                 <Text style={styles.deleteBtnText}>Vaciar</Text>
               </TouchableOpacity>
             </View>
             <View style={styles.containerFinish}>
-            <TouchableOpacity style={styles.finishBtn}>
+            <TouchableOpacity 
+              style={styles.finishBtn}
+              onPress={() => {if(props.countTotal !== 0){props.navigation.navigate("FinishBuy")}}}>
                 <Text style={styles.finishBtnText}>Finalizar Compra</Text>
               </TouchableOpacity>
             </View>
@@ -76,7 +79,8 @@ const Cart =(props) => {
 
 
 const mapDispatchToProps ={
-forceCart: productsActions.forcedCart
+forceCart: productsActions.forcedCart,
+deleteCart: productsActions.deleteAllProducts
 }
 
 const mapStateToProps = (state) =>{
