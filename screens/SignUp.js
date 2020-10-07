@@ -8,6 +8,7 @@ import { Button,  Surface, Title, Snackbar, Subheading} from 'react-native-paper
 import * as Animatable from 'react-native-animatable';
 import Feather from 'react-native-vector-icons/Feather'
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { showMessage, hideMessage } from "react-native-flash-message";
 
 function SignIn( props,{navigation} ) {
 
@@ -18,14 +19,114 @@ function SignIn( props,{navigation} ) {
     mail: '', 
     name: '', 
     surname: '', 
-    loginGoogle:"false"
+    vusername: true, 
+    vpassword: false, 
+    vpasswordValidation: true, 
+    vmail: true, 
+    vname: true, 
+    vsurname: true,
+    correct: false, 
+    vloginGoogle:"false"
   }) 
+
+  
+
 
   const [checkInputText, setCheckInputText] = useState(false)
   const [flag, setFlag] = useState(true)
   const [visible, setVisible] = useState(false)
 
   const onDismissSnackBar = () => setVisible(false)
+
+
+const handleUsername = (val) =>{
+  console.log(val)
+  if (val.trim().length < 3){
+    setUser({
+      ...user,
+      vusername:false
+    })
+  }else{
+    setUser({
+      ...user,
+      vusername:true
+    })
+  }
+}
+const handleName = (val) =>{
+  if (val.trim().length < 3){
+    setUser({
+      ...user,
+      vname:false
+    })
+  }else{
+    setUser({
+      ...user,
+      vname:true
+    })
+  }
+}
+const handleSurname = (val) =>{
+  if (val.trim().length < 3){
+    setUser({
+      ...user,
+      vsurname:false
+    })
+  }else{
+    setUser({
+      ...user,
+      vsurname:true
+    })
+  }
+}
+const handleEmail = (val) =>{
+
+    const validEmailRegex = RegExp( 	
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+
+
+  if (!validEmailRegex.test(val)){
+    setUser({
+      ...user,
+      vmail:false
+    })
+  }else{
+    setUser({
+      ...user,
+      vmail:true
+    })
+  }
+}
+const handlePassword = (val) =>{
+  const validPassword = RegExp(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}/)
+  if (!validPassword.test(val)){
+    setUser({
+      ...user,
+      vpassword:false
+    })
+  }else{
+    setUser({
+      ...user,
+      vpassword:true
+    })
+  }
+}
+const handlePasswordVal = (val, pass) =>{
+ 
+  console.log(val, pass)
+  if (val === pass){
+    setUser({
+      ...user,
+      vpasswordValidation:true
+    })
+  }else{
+    setUser({
+      ...user,
+      vpasswordValidation:false
+    })
+  }
+}
+
 
 
   const readInput = (campo, text) => {
@@ -45,17 +146,28 @@ function SignIn( props,{navigation} ) {
 
     const onPress = async e => {
       e.preventDefault()
-      const res = await props.createUser(user)
-      console.log(res)
+        
+        
+        
+
+        if (user.vusername === true && user.vpasswordValidation === true && user.vpassword === true && user.vname=== true && user.vsurname=== true && user.vmail=== true ){
+          
+          await props.createUser(user)
+          showMessage({
+            message: "Cuenta creada",
+            type: "info",
+            animationDuration:400,
+            icon: "success",
+            backgroundColor: "green",
+            position:"top"
+          })
+        }
+        
+      
       setVisible(!visible)
     }
 
-    useEffect(() => {
-      if (user.username !== '' & user.password !== '' & user.passwordValidation !== '' & user.mail !== ''
-        & user.name !== '' & user.surname !== '') {
-        setFlag(false)
-      }
-    }, [user])
+    
 
     useEffect(() => {
         if (props.token !== '' & user.username !== '') {
@@ -89,6 +201,7 @@ function SignIn( props,{navigation} ) {
 
                 <TextInput 
                   onChangeText={text => readInput('username', text)} 
+                  onEndEditing={e => handleUsername(e.nativeEvent.text)}
                   style={styles.textInput} 
                   data-focusable="false" 
                   selectionColor="green" 
@@ -99,6 +212,19 @@ function SignIn( props,{navigation} ) {
                 />
             
                 </View>
+
+
+                {user.vusername
+                    ? null
+                    :
+                    <Animatable.View
+                    animation="fadeInLeft"
+                    duration={600}
+                    >
+                   <Text style={styles.errorMsg}>{"El usuario debe tener al menos 3 caracteres"}</Text>
+                    </Animatable.View>
+                  }
+                
 {/*----------------------------------------------------------------------------------------------------------------------------------------------------- */}                  
                 <Text style={[styles.text_footer,{
                     marginTop:10}]}>Email
@@ -111,6 +237,7 @@ function SignIn( props,{navigation} ) {
                   />
                 <TextInput 
                   onChangeText={text => readInput('mail', text)} 
+                  onEndEditing={e => handleEmail(e.nativeEvent.text)}
                   style={styles.textInput} 
                   data-focusable="false" 
                   selectionColor="green" 
@@ -119,8 +246,22 @@ function SignIn( props,{navigation} ) {
                   placeholder="Ingresa tu email"
                         
                 />
-            
+
                   </View>
+
+
+                  {user.vmail
+                    ? null
+                    :
+                    <Animatable.View
+                    animation="fadeInLeft"
+                    duration={600}
+                    >
+                     <Text style={styles.errorMsg}>{"Ingrese un email correcto"}</Text>
+                    </Animatable.View>
+                  }
+
+                 
 {/*----------------------------------------------------------------------------------------------------------------------------------------------------- */}
                 <Text style={[styles.text_footer,{
                     marginTop:10}]}>Nombre
@@ -134,6 +275,7 @@ function SignIn( props,{navigation} ) {
                   />
                 <TextInput 
                   onChangeText={text => readInput('name', text)} 
+                  onEndEditing={e => handleName(e.nativeEvent.text)}
                   style={styles.textInput} 
                   data-focusable="false" 
                   selectionColor="green" 
@@ -144,6 +286,18 @@ function SignIn( props,{navigation} ) {
                 />
             
                   </View>
+
+                  {user.vname
+                    ? null
+                    :
+                    <Animatable.View
+                    animation="fadeInLeft"
+                    duration={600}
+                    >
+                    <Text style={styles.errorMsg}>{"El nombre debe tener al menos 3 caracteres"}</Text>
+                    </Animatable.View>
+                  }
+                  
 {/*----------------------------------------------------------------------------------------------------------------------------------------------------- */}                  
                 <Text style={[styles.text_footer,{
                     marginTop:10}]}>Apellido
@@ -157,6 +311,7 @@ function SignIn( props,{navigation} ) {
                   />
                 <TextInput 
                   onChangeText={text => readInput('surname', text)} 
+                  onEndEditing={e => handleSurname(e.nativeEvent.text)}
                   style={styles.textInput} 
                   data-focusable="false" 
                   selectionColor="green" 
@@ -167,6 +322,18 @@ function SignIn( props,{navigation} ) {
                 />
             
                   </View>
+
+                  {user.vsurname
+                    ? null
+                    :
+                    <Animatable.View
+                    animation="fadeInLeft"
+                    duration={600}
+                    >
+                    <Text style={styles.errorMsg}>{"El apellido debe tener al menos 3 caracteres"}</Text>
+                    </Animatable.View>
+                  }
+                  
 {/*----------------------------------------------------------------------------------------------------------------------------------------------------- */}
                 <Text style={[styles.text_footer,{
                     marginTop:10}]}>Contraseña
@@ -180,6 +347,7 @@ function SignIn( props,{navigation} ) {
                   />
                     <TextInput 
                       onChangeText={text => readInput('password', text)} 
+                      onEndEditing={e => handlePassword(e.nativeEvent.text)}
                       style={styles.textInput} 
                       data-focusable="false" 
                       selectionColor="#009387" 
@@ -201,6 +369,20 @@ function SignIn( props,{navigation} ) {
                     </TouchableOpacity>  
                     
                     </View>
+                    
+                    {user.vpassword
+                    ? null
+                    :
+                    <Animatable.View
+                    animation="fadeInLeft"
+                    duration={600}
+                    >
+                    <Text style={styles.errorMsg}>{"La contraseña debe incluir números, mayúsculas y minúsculas"}</Text>
+                    </Animatable.View>
+                    }
+
+
+                    
 {/*----------------------------------------------------------------------------------------------------------------------------------------------------- */}
                   <Text style={[styles.text_footer,{
                     marginTop:10}]}>Repetir Contraseña
@@ -214,6 +396,7 @@ function SignIn( props,{navigation} ) {
                   />
                     <TextInput 
                       onChangeText={text => readInput('passwordValidation', text)} 
+                      onEndEditing={e => handlePasswordVal(e.nativeEvent.text, user.password)}
                       style={styles.textInput} 
                       data-focusable="false" 
                       selectionColor="#009387" 
@@ -235,6 +418,19 @@ function SignIn( props,{navigation} ) {
                     </TouchableOpacity>  
                     
                     </View>
+                    {user.vpasswordValidation
+                    ? null
+                    :
+                    <Animatable.View
+                    animation="fadeInLeft"
+                    duration={600}
+                    >
+                    <Text style={styles.errorMsg}>{"Las contraseñas no coinciden"}</Text>
+                    </Animatable.View>
+                    }
+                    
+
+
                     <TouchableOpacity style={styles.buttonIn} onPress={onPress}>
                         <Text style={{
                                 color: 'white', 

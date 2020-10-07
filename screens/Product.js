@@ -15,7 +15,7 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import { connect } from "react-redux";
 import productsActions from "../redux/actions/productsActions";
 import { useFocusEffect, useIsFocused } from "@react-navigation/native";
-
+import { showMessage, hideMessage } from "react-native-flash-message";
 
 
 
@@ -50,13 +50,37 @@ const upQuantity =(flag) =>{
 }
 
 const addItem = () =>{
-  console.log(props.route)
+  
     if (cartProduct.quantity > props.route.params.stock){
-      alert("NO DISPONEMOS DE LA CANTIDAD SOLICITADA EN STOCK")
+      showMessage({
+        message: "NO DISPONEMOS DE LA CANTIDAD SOLICITADA EN STOCK",
+        type: "info",
+        animationDuration:400,
+        icon: "warning",
+        backgroundColor: "red",
+        position:"bottom"
+      })
     }else{
        
         if (cartProduct.quantity != "0"){
+          showMessage({
+            message: "Añadido al carrito :)",
+            type: "info",
+            animationDuration:400,
+            icon: "success",
+            backgroundColor: "green",
+            position:"top"
+          })
             props.addToCart(cartProduct)  
+        }else{
+          showMessage({
+            message: "Debes agregar al menos una unidad",
+            type: "info",
+            animationDuration:600,
+            icon: "warning",
+            backgroundColor: "red",
+            position:"top"
+          })
         }
     }
 }

@@ -72,17 +72,19 @@ const FinishBuy = (props) =>{
                 <TouchableOpacity
                 onPress={async () => {
                     if (props.countTotal !== 0){
-                    const res = await props.confirm(props.products, props.token)
+                    const res = 
                     Alert.alert(
-                        'Muchas gracias por tu compra',
-                        'Podrás abonarlas al recibir el pedido y recibirás un mail de confirmación.',
+                        '¿Confirmas la compra?',
+                        'La misma llegará pasados 5 días hábiles.',
                         
                         [
                           {
-                            text: 'Ver formas de pago(como comprar)',
-                            onPress: () => {props.navigation.navigate("Faqs")}
+                            text: 'Confirmar',
+                            onPress: () => {
+                              props.confirm(props.products, props.token)
+                              props.navigation.navigate("Gracias")}
                           },
-                          { text: 'Volver a inicio', onPress: () => {props.navigation.navigate("Home")}}
+                          { text: 'Cancelar', onPress: () => {props.navigation.navigate("Home")}}
                         ],
                         { cancelable: false }
                       );

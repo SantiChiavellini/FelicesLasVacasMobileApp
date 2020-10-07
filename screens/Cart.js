@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, Alert } from 'react-native';
 import { State } from 'react-native-gesture-handler';
 import { connect } from 'react-redux';
 import ProductCart from '../components/ProductCart';
@@ -43,7 +43,7 @@ const Cart =(props) => {
           <View style={styles.viewCart}>
             <FlatList 
             style={styles.list}
-            ListEmptyComponent= {() =>(<Text style={{marginTop:80, color:"whitesmoke", fontSize:"50", textAlign:"center"}}>El carrito esta vacio :(</Text>)}
+            ListEmptyComponent= {() =>(<Text style={{marginTop:80, color:"whitesmoke", fontSize:50, textAlign:"center"}}>El carrito esta vacio :(</Text>)}
             data={cartContent}
             renderItem={(item) => <ProductCart prod={item}/>}
             keyExtractor={item => (item.product._id)}
@@ -65,7 +65,23 @@ const Cart =(props) => {
             <View style={styles.containerFinish}>
             <TouchableOpacity 
               style={styles.finishBtn}
-              onPress={() => {if(props.countTotal !== 0){props.navigation.navigate("FinishBuy")}}}>
+              onPress={() => {if(props.countTotal !== 0){
+                
+                Alert.alert(
+                  'Ya casi es tuyo',
+                  'Podrás abonar la compra al recibir el pedido en efectivo o con mercadopago y recibirás un mail de confirmación.',
+                  
+                  [
+                    {
+                      text: 'Ir a confirmar',
+                      onPress: () => {props.navigation.navigate("FinishBuy")}
+                    },
+                    { text: 'Cancelar', onPress: () => {/* props.navigation.goBack() */}}
+                  ],
+                  { cancelable: false }
+                );
+                
+                }}}>
                 <Text style={styles.finishBtnText}>Finalizar Compra</Text>
               </TouchableOpacity>
             </View>

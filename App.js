@@ -12,6 +12,9 @@ import { createStore, applyMiddleware } from 'redux';
 
 import rootReducer from './redux/reducers/rootReducer'
 import MainNavigation from './MainNavigation';
+import FlashMessage from "react-native-flash-message";
+
+
 
 const myStore = createStore(rootReducer, applyMiddleware(thunk))
 
@@ -31,6 +34,7 @@ const App= (props) => {
 
     <Provider store={myStore}>
       <MainNavigation />
+      <FlashMessage position="top" />
     </Provider>
 
    )

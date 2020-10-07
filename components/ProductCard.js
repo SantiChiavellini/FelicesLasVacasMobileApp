@@ -10,7 +10,7 @@ import { Card, Title} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/Ionicons'
 import { connect } from "react-redux";
 import productsActions from "../redux/actions/productsActions";
-
+import { showMessage, hideMessage } from "react-native-flash-message";
 
 
 
@@ -35,14 +35,38 @@ const ProductCard = (props) =>{
 
     const addItem = () =>{
         
-        if (cartProduct.quantity > props.prod.item.stock){
-          alert("NO DISPONEMOS DE LA CANTIDAD SOLICITADA EN STOCK")
-        }else{
-           
-            if (cartProduct.quantity != "0"){
-                props.addToCart(cartProduct)  
-            }
-        }
+          if (cartProduct.quantity > props.prod.item.stock){
+            showMessage({
+              message: "NO DISPONEMOS DE LA CANTIDAD SOLICITADA EN STOCK",
+              type: "info",
+              animationDuration:400,
+              icon: "warning",
+              backgroundColor: "red",
+              position:"bottom"
+            })
+          }else{
+             
+              if (cartProduct.quantity != "0"){
+                showMessage({
+                  message: "Añadido al carrito :)",
+                  type: "info",
+                  animationDuration:400,
+                  icon: "success",
+                  backgroundColor: "green",
+                  position:"top"
+                })
+                  props.addToCart(cartProduct)  
+              }else{
+                showMessage({
+                  message: "Debes agregar al menos una unidad",
+                  type: "info",
+                  animationDuration:600,
+                  icon: "warning",
+                  backgroundColor: "red",
+                  position:"top"
+                })
+              }
+          }
     }
 
       

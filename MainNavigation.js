@@ -20,6 +20,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { ActivityIndicator } from 'react-native-paper';
 import UserActions from './redux/actions/UserActions';
 import FinishBuy from './screens/FinishBuy'
+import Thanks from './screens/Thanks';
 
 
 
@@ -31,7 +32,7 @@ const MainNavigation= (props) => {
 
   const [isLoading, setIsLoading] = React.useState(true)
 
-  console.log(props)
+  
 
   useEffect(() => {
     setTimeout(async() => {
@@ -78,6 +79,7 @@ const MainNavigation= (props) => {
             <Drawer.Screen name="LogOut" component={LogOut} />
             <Drawer.Screen name="Product" component={Product} />
             <Drawer.Screen name="FinishBuy" component={FinishBuy} />
+            <Drawer.Screen name="Gracias" component={Thanks} />
         </Drawer.Navigator>
         :
           <RootStackScreen />

@@ -4,7 +4,7 @@ const productsActions = {
     getProducts: () => {
         return async (dispatch, getState) => {
             
-            const res = await axios.get("http://12545187ac1b.ngrok.io/api/items")
+            const res = await axios.get("http://92b8ae9c0640.ngrok.io/api/items")
             
             dispatch({
                 type: 'GET_PRODUCTS_USER',
@@ -15,7 +15,7 @@ const productsActions = {
     },
     getProductById: (idProduct) => {
         return async (dispatch, getState) => {
-            const res = await axios.get("http://12545187ac1b.ngrok.io/api/items/"+idProduct)
+            const res = await axios.get("http://92b8ae9c0640.ngrok.io/api/items/"+idProduct)
             
             dispatch({
                 type: "GET_PRODUCT"
@@ -77,8 +77,8 @@ const productsActions = {
     },
     confirm:(products, token) =>{
         return async (dispatch, getState)=>{
-            console.log(products, token)
-            const res = await axios.post("http://12545187ac1b.ngrok.io/api/shopConfirm/",products
+            
+            const res = await axios.post("http://92b8ae9c0640.ngrok.io/api/shopConfirm/",products
             , {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -87,7 +87,7 @@ const productsActions = {
             dispatch({
                 type:"DELETE_CART"
             }) 
-            console.log(res)
+            
         }
     }
 }

@@ -19,7 +19,7 @@ const ProductBuy = (props) =>{
    
     
 
-    console.log(props)
+    
       
     return(
     

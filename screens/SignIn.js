@@ -8,7 +8,7 @@ import { Button, Surface, Title, Snackbar, Subheading} from 'react-native-paper'
 import * as Animatable from 'react-native-animatable';
 import Feather from 'react-native-vector-icons/Feather'
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-
+import { showMessage, hideMessage } from "react-native-flash-message";
 function SignIn( props,{navigation} ) {
 
     const [user, setUser] =useState({
@@ -16,6 +16,9 @@ function SignIn( props,{navigation} ) {
         password: '', 
         secureText: true
     })
+
+    const [error, setError] = useState("")
+    
     const [checkInputText, setCheckInputText] = useState(false)
     const [flag, setFlag] = useState(true)
     const [visible, setVisible] = useState(false)
@@ -56,7 +59,20 @@ function SignIn( props,{navigation} ) {
 
     const onPress = async e => {
         e.preventDefault()
-        await props.logUser(user)
+        const res = await props.logUser(user)
+        if (res.success === false){
+            setError("Usuario y/o contraseña incorrectos")
+        }else{
+            showMessage({
+                message: "Bienvenido",
+                type: "info",
+                animationDuration:400,
+                icon: "success",
+                backgroundColor: "green",
+                position:"top"
+              })
+            setError("")
+        }
         setVisible(!visible)
     }
 
@@ -72,6 +88,12 @@ function SignIn( props,{navigation} ) {
                 style={styles.footer}
                 animation="fadeInUpBig"
             >
+                <Animatable.View
+                animation="fadeInLeft"
+                duration={800}
+                >
+                    <Text style={styles.errorMsg}>{error}</Text>
+                </Animatable.View>
                 <Text style={styles.text_footer}>Usuario</Text>
                 <View style={styles.action}>
                 <FontAwesome 
@@ -132,7 +154,7 @@ function SignIn( props,{navigation} ) {
                     />
                 </TouchableOpacity>  
                 </View>
-
+                
                 <TouchableOpacity style={styles.buttonIn} onPress={onPress}>
                     <Text style={{
                             color: 'white', 
@@ -238,6 +260,7 @@ const styles = StyleSheet.create({
     errorMsg: {
         color: '#FF0000',
         fontSize: 14,
+        textAlign: "center"
     },
     buttonIn: {
         alignItems: 'center',
